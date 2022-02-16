@@ -1,7 +1,8 @@
 // import internal modules
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import {decodeToken} from 'react-jwt'
 
 // import external modules
 import BlueBox from '../../../components/module/BlueBox';
@@ -9,11 +10,31 @@ import HistoryBox from '../../../components/module/HistoryBox';
 
 
 const Home = () => {
+    const tokenUser = localStorage.getItem('token');
+    const userInfo = decodeToken(tokenUser);
+    const [balanceUser, setBalanceUser] = useState([]);
+    const [phoneUser, setPhoneUser] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
+        {
+            headers: {
+                Authorization: 'Bearer ' + tokenUser
+            }
+        })
+        .then((res) => {
+            const resultBalance = res.data.data.balance;
+            const resultPhoneNumber = res.data.data.phone;
+            setBalanceUser(resultBalance);
+            setPhoneUser(resultPhoneNumber);
+        })
+    }, [])
   return (
     <Fragment>
             <main className="bg-primary rounded row g-0 p-4">
                 <BlueBox
-                    balance='goceng'></BlueBox>
+                    balanceUser={balanceUser}
+                    phoneUser={phoneUser}></BlueBox>
                 <div className="col flex-grow-0 my-3">
                     <Link to={"/main/topup"} style={{ textDecoration: 'none', color: 'black' }}><div className="d-flex px-2 py-2 bg-light bg-gradient rounded my-3">
                         <img src={require("../../../assets/img/icons/arrowup_blue_homepage.svg").default} alt="" />
