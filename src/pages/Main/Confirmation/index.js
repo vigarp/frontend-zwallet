@@ -43,7 +43,7 @@ const Confirmation = () => {
     })
     .then((res) => {
       const userBalanceLeft = res.data.data.balance;
-      setBalanceLeft(userBalanceLeft);
+      setBalanceLeft(userBalanceLeft - transferDetail.amount);
     })
   }, []);
 
@@ -60,8 +60,7 @@ const Confirmation = () => {
     })
     .then((res) => {
       alert(res.data.message);
-      localStorage.removeItem('tempTransfer')
-      navigate("/main/transfer-success")
+      navigate("/main/transfer-success");
     })
   }
 
