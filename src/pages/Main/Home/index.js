@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {decodeToken} from 'react-jwt'
+import { decodeToken } from 'react-jwt'
 
 // import external modules
 import BlueBox from '../../../components/module/BlueBox';
@@ -14,23 +14,36 @@ const Home = () => {
     const userInfo = decodeToken(tokenUser);
     const [balanceUser, setBalanceUser] = useState([]);
     const [phoneUser, setPhoneUser] = useState([]);
+    const [sortHistory, setSortHistory] = useState([])
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
-        {
-            headers: {
-                Authorization: 'Bearer ' + tokenUser
-            }
-        })
-        .then((res) => {
-            const resultBalance = res.data.data.balance;
-            const resultPhoneNumber = res.data.data.phone;
-            setBalanceUser(resultBalance);
-            setPhoneUser(resultPhoneNumber);
-        })
+            {
+                headers: {
+                    Authorization: 'Bearer ' + tokenUser
+                }
+            })
+            .then((res) => {
+                const resultBalance = res.data.data.balance;
+                const resultPhoneNumber = res.data.data.phone;
+                setBalanceUser(resultBalance);
+                setPhoneUser(resultPhoneNumber);
+            })
     }, [])
-  return (
-    <Fragment>
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/history?limit=4`,
+            {
+                headers: {
+                    Authorization: 'Bearer ' + tokenUser
+                }
+            })
+            .then((res) => {
+                const resultShortHistory = res.data.data
+                setSortHistory(resultShortHistory)
+            })
+    }, [])
+    return (
+        <Fragment>
             <main className="bg-primary rounded row g-0 p-4">
                 <BlueBox
                     balanceUser={balanceUser}
@@ -65,12 +78,19 @@ const Home = () => {
                             <Link to={"/main/history"} style={{ textDecoartion: 'none' }}>See All</Link>
                         </div>
                     </div>
+                    {sortHistory.map((item, index) => (
                         <HistoryBox
-                            ></HistoryBox>
+                            key={index}
+                            picture={item.picture}
+                            amount={item.amount}
+                            username={item.username}
+                            type={item.type_detail}
+                        ></HistoryBox>
+                    ))}
                 </article>
             </main>
         </Fragment>
-  )
+    )
 }
 
 export default Home
