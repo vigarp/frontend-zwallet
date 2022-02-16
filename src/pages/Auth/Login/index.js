@@ -1,13 +1,15 @@
 // import internal modules
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // import external modules
 import Input from '../../../components/base/Input';
 import Button from '../../../components/base/Button';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [formLogin, setFormLogin] = useState({
     email: '',
     password: ''
@@ -25,8 +27,10 @@ const Login = () => {
       password: formLogin.password
     })
     .then((res) => {
-      console.log(res)
+      const tokenUser = res.data.data.token
+      localStorage.setItem('token', tokenUser)
       alert(res.data.message)
+      navigate("/main")
     })
     .catch((err) => {
       console.log(err)
