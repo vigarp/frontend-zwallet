@@ -75,7 +75,7 @@ const Home = () => {
                             <div className="fw-bold">Transactions History</div>
                         </div>
                         <div className="col d-flex justify-content-end">
-                            <Link to={"/main/history"} style={{ textDecoartion: 'none' }}>See All</Link>
+                        <div className="text-decoration-none"><Link to={"/main/history"} style={{ textDecoration: 'none' }}>See All</Link></div>
                         </div>
                     </div>
                     {sortHistory.map((item, index) => (

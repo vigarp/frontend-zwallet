@@ -13,7 +13,7 @@ const Main = () => {
       <Navbar />
       <div className="d-flex px-5 my-5 min-vh-100">
         <Sidebar />
-        <div className="bg-white border-rounded w-100 ms-5">
+        <div className="bg-transparent border-rounded w-100 ms-5">
           <Outlet />
         </div>
       </div>
