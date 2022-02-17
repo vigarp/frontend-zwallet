@@ -5,18 +5,18 @@ const initialState = {
 }
 
 
-const Fetch = (state = initialState, action={})=> {
+const FetchUsers = (state = initialState, action={})=> {
     switch (action.type) {
-        case 'GET_GAME_REQUEST':
+        case 'GET_CONTACTS_REQUEST':
             return {...state, loading: true};
-        case 'GET_GAME_SUCCESS':
+        case 'GET_CONTACTS_RESPONSE':
             return {...state, loading: false, data: action.payload};
-        case 'GET_GAME_FAIL':
-            return {...state, loading: false, error: action.payload};
+        case 'GET_CONTACTS_ERROR':
+            return {...state, loading: false, error: action.payload, data: []};
         default:
             return state;
     }
     
 }
 
-export default Fetch
+export default FetchUsers

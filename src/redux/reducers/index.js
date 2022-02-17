@@ -1,13 +1,11 @@
+// import internal modules
 import { combineReducers } from "redux";
 
-/*reducers */
-import Games from './games'
-// import User from './user'
+// import external modules
+import contacts from './contacts';
 
 const rootReducers = combineReducers({
-    Games,
-    // User,
-    // ...
+    contacts,
 })
 
 export default rootReducers
