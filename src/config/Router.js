@@ -15,7 +15,6 @@ import ResetPassword from "../pages/Auth/ResetPassword";
 import Main from "../pages/Main";
 import Home from "../pages/Main/Home";
 import History from "../pages/Main/History";
-import DetailHistory from "../pages/Main/DetailHistory";
 import Transfer from "../pages/Main/Transfer";
 import TransferInput from "../pages/Main/TransferInput";
 import Confirmation from "../pages/Main/Confirmation";
@@ -40,7 +39,6 @@ const Router = () => {
                 <Route path="/main" element={<Main />}>
                     <Route path="home" element={<Home />} />
                     <Route path="history" element={<History />} />
-                    <Route path="history/:id" element={<DetailHistory />} />
                     <Route path="transfer" element={<Transfer />} />
                     <Route path="transfer/:id" element={<TransferInput />} />
                     <Route path="confirmation" element={<Confirmation />} />
