@@ -9,8 +9,8 @@ import { GetContacts } from '../../../redux/actions/contacts';
 const Transfer = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
     const contactsData = useSelector((state) => state.contacts)
-
     const [searchParams, setSearchParams] = useSearchParams();
     const querySearch = searchParams.get('search');
 

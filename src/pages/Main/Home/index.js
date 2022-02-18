@@ -9,23 +9,22 @@ import {useDispatch, useSelector} from 'react-redux';
 import BlueBox from '../../../components/module/BlueBox';
 import HistoryBox from '../../../components/module/HistoryBox';
 import { GetUserBalance } from '../../../redux/actions/balance';
-
+import { GetUserPhone } from '../../../redux/actions/phone';
 
 const Home = () => {
     const tokenUser = localStorage.getItem('token');
     const userInfo = decodeToken(tokenUser);
     const dispatch = useDispatch();
-    const balanceData = useSelector((state) => state.balance);
 
-    const [balanceUser, setBalanceUser] = useState([]);
-    const [phoneUser, setPhoneUser] = useState([]);
+    const balanceData = useSelector((state) => state.balance);
+    const phoneData = useSelector((state) => state.phone);
     const [sortHistory, setSortHistory] = useState([]);
 
     useEffect(() => {
         dispatch((GetUserBalance()))
+        dispatch((GetUserPhone()))
     }, []);
 
-    console.log('isi balance' ,balanceData?.data)
     // useEffect(() => {
     //     axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
     //         {
@@ -56,8 +55,8 @@ const Home = () => {
         <Fragment>
             <main className="bg-primary rounded row g-0 p-4">
                 <BlueBox
-                    balanceUser={balanceData.data}
-                    phoneUser={phoneUser}></BlueBox>
+                    balanceUser={balanceData?.data}
+                    phoneUser={phoneData?.data}></BlueBox>
                 <div className="col flex-grow-0 my-3">
                     <Link to={"/main/topup"} style={{ textDecoration: 'none', color: 'black' }}><div className="d-flex px-2 py-2 bg-light bg-gradient rounded my-3">
                         <img src={require("../../../assets/img/icons/arrowup_blue_homepage.svg").default} alt="" />
