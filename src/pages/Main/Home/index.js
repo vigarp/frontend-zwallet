@@ -2,34 +2,44 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { decodeToken } from 'react-jwt'
+import { decodeToken } from 'react-jwt';
+import {useDispatch, useSelector} from 'react-redux';
 
 // import external modules
 import BlueBox from '../../../components/module/BlueBox';
 import HistoryBox from '../../../components/module/HistoryBox';
+import { GetUserBalance } from '../../../redux/actions/balance';
 
 
 const Home = () => {
     const tokenUser = localStorage.getItem('token');
     const userInfo = decodeToken(tokenUser);
+    const dispatch = useDispatch();
+    const balanceData = useSelector((state) => state.balance);
+
     const [balanceUser, setBalanceUser] = useState([]);
     const [phoneUser, setPhoneUser] = useState([]);
-    const [sortHistory, setSortHistory] = useState([])
+    const [sortHistory, setSortHistory] = useState([]);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
-            {
-                headers: {
-                    Authorization: 'Bearer ' + tokenUser
-                }
-            })
-            .then((res) => {
-                const resultBalance = res.data.data.balance;
-                const resultPhoneNumber = res.data.data.phone;
-                setBalanceUser(resultBalance);
-                setPhoneUser(resultPhoneNumber);
-            })
-    }, [])
+        dispatch((GetUserBalance()))
+    }, []);
+
+    console.log('isi balance' ,balanceData?.data)
+    // useEffect(() => {
+    //     axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
+    //         {
+    //             headers: {
+    //                 Authorization: 'Bearer ' + tokenUser
+    //             }
+    //         })
+    //         .then((res) => {
+    //             const resultBalance = res.data.data.balance;
+    //             const resultPhoneNumber = res.data.data.phone;
+    //             setBalanceUser(resultBalance);
+    //             setPhoneUser(resultPhoneNumber);
+    //         })
+    // }, [])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/history?limit=4`,
             {
@@ -46,7 +56,7 @@ const Home = () => {
         <Fragment>
             <main className="bg-primary rounded row g-0 p-4">
                 <BlueBox
-                    balanceUser={balanceUser}
+                    balanceUser={balanceData.data}
                     phoneUser={phoneUser}></BlueBox>
                 <div className="col flex-grow-0 my-3">
                     <Link to={"/main/topup"} style={{ textDecoration: 'none', color: 'black' }}><div className="d-flex px-2 py-2 bg-light bg-gradient rounded my-3">

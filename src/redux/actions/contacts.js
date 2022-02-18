@@ -34,7 +34,7 @@ export const GetContacts = (querySearch)=> {
             })
             .then((res)=> {
                const dataContacts =  res.data?.data
-               dispatch(GetContactsRequest(dataContacts))
+               dispatch(GetContactsResponse(dataContacts))
             })
             .catch((err)=>{
                 const message =  err.message
@@ -51,7 +51,7 @@ export const GetContacts = (querySearch)=> {
                 dispatch(GetContactsResponse(dataContacts))
             })
             .catch((err) => {
-                const message = err.message
+                const message = err.messages
                 dispatch(GetContactsError(message))
             })
         }

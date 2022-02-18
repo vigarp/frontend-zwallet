@@ -4,19 +4,17 @@ const initialState = {
     error: false
 }
 
-
-const FetchContacts = (state = initialState, action={})=> {
+const FetchUserBalance = (state = initialState, action={}) => {
     switch (action.type) {
-        case 'GET_CONTACTS_REQUEST':
+        case 'GET_USER_BALANCE_REQUEST':
             return {...state, loading: true};
-        case 'GET_CONTACTS_RESPONSE':
+        case 'GET_USER_BALANCE_RESPONSE':
             return {...state, loading: false, data: action.payload};
-        case 'GET_CONTACTS_ERROR':
+        case 'GET_USER_BALANCE_ERROR':
             return {...state, loading: false, error: action.payload, data: []};
         default:
             return state;
     }
-    
 }
 
-export default FetchContacts
+export default FetchUserBalance
