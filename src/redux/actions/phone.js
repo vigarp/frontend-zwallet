@@ -28,7 +28,7 @@ export const GetUserPhone = () => {
         dispatch(GetUserPhoneRequest())
         return axios({
             method: 'GET',
-            url: `${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
+            url: `${process.env.REACT_APP_URL_BACKEND}/users/${userInfo?.id}`,
             headers: {Authorization: 'Bearer ' + tokenUser}
         })
         .then((res) => {

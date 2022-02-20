@@ -28,7 +28,7 @@ export const GetShortHistory = () => {
         dispatch(GetShortHistoryRequest())
         return axios({
             method: 'GET',
-            url: `${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/history?limit=4`,
+            url: `${process.env.REACT_APP_URL_BACKEND}/users/${userInfo?.id}/history?limit=4`,
             headers: {Authorization: 'Bearer ' + tokenUser}
         })
         .then((res) => {
