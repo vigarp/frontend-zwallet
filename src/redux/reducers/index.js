@@ -9,6 +9,7 @@ import shortHistory from './shortHistory';
 import history from './history';
 import receiverDetail from './receiverDetail';
 import transfer from './transfer';
+import user from './user'
 
 const rootReducers = combineReducers({
     contacts,
@@ -17,7 +18,9 @@ const rootReducers = combineReducers({
     shortHistory,
     history,
     receiverDetail,
-    transfer
+    transfer,
+    user
+
 
 
 })

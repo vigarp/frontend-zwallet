@@ -9,11 +9,11 @@ import store from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserContext>
-      <Provider store={store}>
+    <Provider store={store}>
+      <UserContext>
         <App />
-      </Provider>
-    </UserContext>
+      </UserContext>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
