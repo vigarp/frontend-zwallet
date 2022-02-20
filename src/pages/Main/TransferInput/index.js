@@ -10,13 +10,11 @@ import { GetReceiverDetail } from '../../../redux/actions/receiverDetail';
 
 const TransferInput = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {id} = useParams();
 
   const balanceData = useSelector((state) => state.balance);
   const receiverData = useSelector((state) => state.receiverDetail);
-
-  const navigate = useNavigate();
-
-  const {id} = useParams();
 
   useEffect(() => {
     dispatch((GetUserBalance()))

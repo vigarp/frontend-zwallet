@@ -11,6 +11,7 @@ import { GetUserPhone } from '../../../redux/actions/phone';
 import { GetShortHistory } from '../../../redux/actions/shortHistory';
 
 const Home = () => {
+    localStorage.removeItem('tempTransfer');
     const dispatch = useDispatch();
 
     const balanceData = useSelector((state) => state.balance);

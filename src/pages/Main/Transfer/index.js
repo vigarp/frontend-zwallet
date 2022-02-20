@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { GetContacts } from '../../../redux/actions/contacts';
 
 const Transfer = () => {
+    localStorage.removeItem('tempTransfer');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
