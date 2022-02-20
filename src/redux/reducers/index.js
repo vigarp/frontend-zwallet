@@ -7,13 +7,15 @@ import balance from './balance';
 import phone from './phone';
 import shortHistory from './shortHistory';
 import history from './history';
+import receiverDetail from './receiverDetail';
 
 const rootReducers = combineReducers({
     contacts,
     balance,
     phone,
     shortHistory,
-    history
+    history,
+    receiverDetail
 
 })
 

@@ -1,42 +1,26 @@
 // import internal modules
 import React, {Fragment, useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { decodeToken } from 'react-jwt';
+import { useDispatch, useSelector } from 'react-redux';
+
+// import external modules
+import { GetUserBalance } from '../../../redux/actions/balance';
+import { GetReceiverDetail } from '../../../redux/actions/receiverDetail';
 
 
 const TransferInput = () => {
-  const tokenUser = localStorage.getItem('token');
-  const userInfo = decodeToken(tokenUser);
+  const dispatch = useDispatch();
+
+  const balanceData = useSelector((state) => state.balance);
+  const receiverData = useSelector((state) => state.receiverDetail);
+
   const navigate = useNavigate();
 
   const {id} = useParams();
-  const [detailTransfer, setDetailTransfer] = useState({});
-  const [currentBalance, setCurrentBalance] = useState([]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const resultCurrentBalance = res.data.data.balance;
-      setCurrentBalance(resultCurrentBalance);
-    })
-  }, []);
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${id}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const resultContactDetail = res.data.data;
-      setDetailTransfer(resultContactDetail);
-    })
+    dispatch((GetUserBalance()))
+    dispatch((GetReceiverDetail(id)))
   }, []);
 
   const [formInput, setFormInput] = useState({
@@ -60,10 +44,10 @@ const TransferInput = () => {
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transfer Money</div>
                 <div className="rounded py-3 bg-light row my-3">
-                    <div className="col flex-grow-0 px-3"><img src={detailTransfer.picture} width={60} height={60} alt="" /></div>
+                    <div className="col flex-grow-0 px-3"><img src={receiverData.data?.picture} width={60} height={60} alt="" /></div>
                     <div className="col my-3">
-                        <div className="fw-bold">{detailTransfer.username}</div>
-                        <div className="text-muted">{detailTransfer.email}</div>
+                        <div className="fw-bold">{receiverData.data?.username}</div>
+                        <div className="text-muted">{receiverData.data?.email}</div>
                     </div>
                 </div>
                 <div className="my-5">
@@ -77,7 +61,7 @@ const TransferInput = () => {
                         placeholder="0.00" 
                         type="number" />
                     </div>
-                    <div className="text-center fw-bold">Rp. {currentBalance} Available</div>
+                    <div className="text-center fw-bold">Rp. {balanceData?.data} Available</div>
                     <div className="text-center overflow-hidden my-3 mx-5 p-3">
                         <img className="position-absolute mt-1" src={require("../../../assets/img/icons/form_edit_input_amount_bank.png")} alt="" />
                         <input
