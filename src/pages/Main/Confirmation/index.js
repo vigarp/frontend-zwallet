@@ -1,10 +1,15 @@
 // import internal modules
 import React, {Fragment, useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {decodeToken} from 'react-jwt';
 
+// import external modules
+import { PostTransfer } from '../../../redux/actions/transfer';
+
 const Confirmation = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const tokenUser = localStorage.getItem('token');
   const userInfo = decodeToken(tokenUser);
@@ -17,6 +22,7 @@ const Confirmation = () => {
     amount: transferDetail.amount,
     notes: transferDetail.notes
   })
+  const transferData = useSelector((state) => state.transfer)
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${transferDetail.receiver}`,
@@ -48,20 +54,21 @@ const Confirmation = () => {
   }, []);
 
   const handleClick = () => {
-    axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/transfer`,
-    {
-      receiver: formInput.receiver,
-      amount: formInput.amount,
-      notes: formInput.notes
-    }, {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      alert(res.data.message);
-      navigate("/main/transfer-success");
-    })
+    dispatch((PostTransfer(formInput)))
+    // axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/transfer`,
+    // {
+    //   receiver: formInput.receiver,
+    //   amount: formInput.amount,
+    //   notes: formInput.notes
+    // }, {
+    //   headers: {
+    //     Authorization: 'Bearer ' + tokenUser
+    //   }
+    // })
+    // .then((res) => {
+    //   alert(res.data.message);
+    //   navigate("/main/transfer-success");
+    // })
   }
 
   return (
