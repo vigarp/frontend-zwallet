@@ -17,6 +17,7 @@ const Transfer = () => {
 
     useEffect(() => {
         dispatch(GetContacts(querySearch))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [querySearch])
     const handleSearch = (e) => {
         if (e.key === 'Enter') {

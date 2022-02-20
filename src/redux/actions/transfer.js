@@ -1,11 +1,9 @@
 // import internal modules
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { decodeToken } from "react-jwt";
 
 const tokenUser = localStorage.getItem('token');
 const userInfo = decodeToken(tokenUser);
-const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
 
 export const PostTransferRequest = () => {
     return {

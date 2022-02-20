@@ -19,6 +19,7 @@ const TransferInput = () => {
   useEffect(() => {
     dispatch((GetUserBalance()))
     dispatch((GetReceiverDetail(id)))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [formInput, setFormInput] = useState({

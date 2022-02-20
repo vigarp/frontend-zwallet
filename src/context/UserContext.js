@@ -1,5 +1,5 @@
 // import internal modules
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import external modules
@@ -15,6 +15,7 @@ const UserContext = ({ children }) => {
     useEffect(() => {
         dispatch((GetUserDetail()))
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <userContext.Provider value={{ userName: userDetailData.data?.username, userPicture: userDetailData.data?.picture, userEmail: userDetailData.data?.email}}>

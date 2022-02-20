@@ -1,8 +1,7 @@
 // import internal modules
 import React, {Fragment, useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import {decodeToken} from 'react-jwt';
 
 // import external modules
@@ -10,19 +9,18 @@ import { PostTransfer } from '../../../redux/actions/transfer';
 
 const Confirmation = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const tokenUser = localStorage.getItem('token');
   const userInfo = decodeToken(tokenUser);
 
   const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
   const [detailPerson, setDetailPerson] = useState([]);
   const [balanceLeft, setBalanceLeft] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [formInput, setFormInput] = useState({
     receiver: transferDetail.receiver,
     amount: transferDetail.amount,
     notes: transferDetail.notes
   })
-  const transferData = useSelector((state) => state.transfer)
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${transferDetail.receiver}`,
@@ -38,6 +36,7 @@ const Confirmation = () => {
     .catch((err) => {
       console.log(err.response)
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -51,6 +50,7 @@ const Confirmation = () => {
       const userBalanceLeft = res.data.data.balance;
       setBalanceLeft(userBalanceLeft - transferDetail.amount);
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = () => {
