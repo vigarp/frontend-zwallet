@@ -5,13 +5,15 @@ import { combineReducers } from "redux";
 import contacts from './contacts';
 import balance from './balance';
 import phone from './phone';
-import shortHistory from './shortHistory'
+import shortHistory from './shortHistory';
+import history from './history';
 
 const rootReducers = combineReducers({
     contacts,
     balance,
     phone,
-    shortHistory
+    shortHistory,
+    history
 
 })
 

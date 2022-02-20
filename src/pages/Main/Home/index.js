@@ -21,6 +21,7 @@ const Home = () => {
         dispatch((GetUserBalance()))
         dispatch((GetUserPhone()))
         dispatch((GetShortHistory()))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <Fragment>
