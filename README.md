@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/35a0063e-debd-4015-a7fa-a796b9970b0c/deploy-status)](https://app.netlify.com/sites/staging-zwallet-vigar/deploys)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
