@@ -1,11 +1,12 @@
 // import internal modules
 import React, {Fragment, useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import {decodeToken} from 'react-jwt';
 
 // import external modules
 import { PostTransfer } from '../../../redux/actions/transfer';
+import { GetTransferDetail } from '../../../redux/actions/transferDetail';
 
 const Confirmation = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ const Confirmation = () => {
   const userInfo = decodeToken(tokenUser);
 
   const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
-  const [detailPerson, setDetailPerson] = useState([]);
+  // const [detailPerson, setDetailPerson] = useState([]);
+  const detailPersonData = useSelector((state) => state.transferDetail);
   const [balanceLeft, setBalanceLeft] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [formInput, setFormInput] = useState({
@@ -21,21 +23,24 @@ const Confirmation = () => {
     amount: transferDetail.amount,
     notes: transferDetail.notes
   })
+  
+  console.log(detailPersonData)
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${transferDetail.receiver}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const resultReceiver = res.data.data;
-      setDetailPerson(resultReceiver);
-    })
-    .catch((err) => {
-      console.log(err.response)
-    })
+    dispatch((GetTransferDetail(transferDetail)))
+    // axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${transferDetail.receiver}`,
+    // {
+    //   headers: {
+    //     Authorization: 'Bearer ' + tokenUser
+    //   }
+    // })
+    // .then((res) => {
+    //   const resultReceiver = res.data.data;
+    //   setDetailPerson(resultReceiver);
+    // })
+    // .catch((err) => {
+    //   console.log(err.response)
+    // })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,10 +81,10 @@ const Confirmation = () => {
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transfer To</div>
                 <div className="rounded py-3 bg-light row my-3">
-                    <div className="col flex-grow-0 px-3"><img src={detailPerson.picture} width={60} height={60} alt="" /></div>
+                    <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="" /></div>
                     <div className="col my-3">
-                        <div className="fw-bold">{detailPerson.username}</div>
-                        <div className="text-muted">{detailPerson.email}</div>
+                        <div className="fw-bold">{detailPersonData.data?.username}</div>
+                        <div className="text-muted">{detailPersonData.data?.email}</div>
                     </div>
                 </div>
                 <div className="g-0 ps-3 fw-bold my-5">Details</div>

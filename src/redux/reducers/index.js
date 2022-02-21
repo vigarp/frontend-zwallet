@@ -12,6 +12,7 @@ import transfer from './transfer';
 import user from './user';
 import login from './login';
 import editPic from './editPic';
+import transferDetail from './transferDetail';
 
 const rootReducers = combineReducers({
     contacts,
@@ -23,7 +24,8 @@ const rootReducers = combineReducers({
     transfer,
     user,
     login,
-    editPic
+    editPic,
+    transferDetail
 
 
 

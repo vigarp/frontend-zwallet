@@ -1,14 +1,12 @@
 // import internal modules
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
 import { editPic } from '../../../redux/actions/editPic';
 import './profile.css'
 
 const Profile = () => {
-  const tokenUser = localStorage.getItem('token');
   localStorage.removeItem('tempTransfer');
   const dispatch = useDispatch();
 
