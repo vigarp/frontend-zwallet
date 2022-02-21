@@ -1,9 +1,10 @@
 // import internal modules
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
+import { GetContacts } from '../../../redux/actions/contacts';
 import { editPic } from '../../../redux/actions/editPic';
 import './profile.css'
 
@@ -13,9 +14,11 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const userDetailData = useSelector((state) => state.user);
+  const contactsData = useSelector((state) => state.contacts);
 
   useEffect(() => {
     dispatch((GetUserDetail()))
+    dispatch((GetContacts()))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -28,14 +31,14 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch((editPic(formDataPic)))
-    .then(() => {
-      dispatch((GetUserDetail()))
-    })
+      .then(() => {
+        dispatch((GetUserDetail()))
+      })
   }
   const handleLogout = () => {
     localStorage.removeItem('token')
     window.location.reload('/auth/login')
-}
+  }
   return (
     <Fragment>
       <main className="bg-white rounded g-0 p-4 d-flex flex-column align-items-center">
@@ -77,7 +80,23 @@ const Profile = () => {
           </div>
         </article>
         <article className="bg-white rounded col ms-1">
-          <div>contact info</div>
+          <div className="row g-0 p-3">
+            <div className="col d-flex justify-content-start">
+              <div className="fw-bold">Contacts Info</div>
+            </div>
+            <div className="col d-flex justify-content-end">
+              <div className="text-decoration-none"><Link to={"/main/transfer"} style={{ textDecoration: 'none' }}>See All</Link></div>
+            </div>
+          </div>
+          {contactsData?.data.map((item, index) => (
+          <div className="row g-0 me-3 my-4 user-pointer" key={index} onClick={() => navigate(`/main/transfer/${item.id}`)}>
+            <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt="" /></div>
+            <div className="col lh-lg">
+              <div className="fw-bold">{item.username}</div>
+              <div className="text-muted">{item.phone}</div>
+            </div>
+          </div>
+          ))}
         </article>
       </main>
     </Fragment>

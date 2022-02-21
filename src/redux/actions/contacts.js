@@ -29,7 +29,7 @@ export const GetContacts = (querySearch)=> {
         if(querySearch) {
             return axios({
                 method: 'GET',
-                url: `${process.env.REACT_APP_URL_BACKEND}/users?limit=5&name=${querySearch}`,
+                url: `${process.env.REACT_APP_URL_BACKEND}/users?limit=3&name=${querySearch}`,
                 headers: {Authorization: 'Bearer ' + tokenUser}
             })
             .then((res)=> {
