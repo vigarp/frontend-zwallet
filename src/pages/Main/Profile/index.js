@@ -29,18 +29,6 @@ const Profile = () => {
     .then(() => {
       dispatch((GetUserDetail()))
     })
-    // axios({
-    //   method: 'PUT',
-    //   url: `http://localhost:4001/v1/users/${userDetailData.data.id}/picture`,
-    //   headers: { Authorization: 'Bearer ' + tokenUser },
-    //   data: formDataPic
-    // })
-    //   .then(() => {
-    //     dispatch((GetUserDetail()))
-    //   })
-    //   .catch((err) => {
-    //     alert(err)
-    //   })
   }
   return (
     <Fragment>

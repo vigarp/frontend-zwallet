@@ -1,22 +1,18 @@
 // import internal modules
 import React, {Fragment, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import {decodeToken} from 'react-jwt';
 
 // import external modules
 import { PostTransfer } from '../../../redux/actions/transfer';
 import { GetTransferDetail } from '../../../redux/actions/transferDetail';
+import { GetUserBalance } from '../../../redux/actions/balance';
 
 const Confirmation = () => {
   const dispatch = useDispatch();
-  const tokenUser = localStorage.getItem('token');
-  const userInfo = decodeToken(tokenUser);
 
   const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
-  // const [detailPerson, setDetailPerson] = useState([]);
   const detailPersonData = useSelector((state) => state.transferDetail);
-  const [balanceLeft, setBalanceLeft] = useState([]);
+  const balanceData = useSelector((state) => state.balance);
   // eslint-disable-next-line no-unused-vars
   const [formInput, setFormInput] = useState({
     receiver: transferDetail.receiver,
@@ -24,56 +20,14 @@ const Confirmation = () => {
     notes: transferDetail.notes
   })
   
-  console.log(detailPersonData)
-
   useEffect(() => {
     dispatch((GetTransferDetail(transferDetail)))
-    // axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${transferDetail.receiver}`,
-    // {
-    //   headers: {
-    //     Authorization: 'Bearer ' + tokenUser
-    //   }
-    // })
-    // .then((res) => {
-    //   const resultReceiver = res.data.data;
-    //   setDetailPerson(resultReceiver);
-    // })
-    // .catch((err) => {
-    //   console.log(err.response)
-    // })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const userBalanceLeft = res.data.data.balance;
-      setBalanceLeft(userBalanceLeft - transferDetail.amount);
-    })
+    dispatch((GetUserBalance()))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = () => {
     dispatch((PostTransfer(formInput)))
-    // axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/transfer`,
-    // {
-    //   receiver: formInput.receiver,
-    //   amount: formInput.amount,
-    //   notes: formInput.notes
-    // }, {
-    //   headers: {
-    //     Authorization: 'Bearer ' + tokenUser
-    //   }
-    // })
-    // .then((res) => {
-    //   alert(res.data.message);
-    //   navigate("/main/transfer-success");
-    // })
   }
 
   return (
@@ -97,7 +51,7 @@ const Confirmation = () => {
                 <div className="row g-0 me-3 my-4">
                     <div className="col lh-lg ps-3">
                         <div className="text-muted">Balance Left</div>
-                        <div className="fw-bold">Rp. {balanceLeft}</div>
+                        <div className="fw-bold">Rp. {balanceData?.data - transferDetail.amount}</div>
                     </div>
                 </div>
                 <div className="row g-0 me-3 my-4">
