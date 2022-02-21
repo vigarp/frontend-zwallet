@@ -1,5 +1,6 @@
 // import internal modules
 import React, { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
@@ -8,6 +9,7 @@ import './profile.css'
 
 const Profile = () => {
   localStorage.removeItem('tempTransfer');
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const userDetailData = useSelector((state) => state.user);
@@ -30,6 +32,10 @@ const Profile = () => {
       dispatch((GetUserDetail()))
     })
   }
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    window.location.reload('/auth/login')
+}
   return (
     <Fragment>
       <main className="bg-white rounded g-0 p-4 d-flex flex-column align-items-center">
@@ -51,7 +57,24 @@ const Profile = () => {
       </main>
       <main className="row g-0 mt-3">
         <article className="bg-white rounded col me-1">
-          <div>personal information</div>
+          <div className="d-flex flex-column align-items-center">
+            <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-pointer">
+              <div className="fw-bold flex-grow-1" onClick={() => navigate("/main/personal-information")} >Personal Information</div>
+              <img src={require("../../../assets/img/icons/arrowright_profilepage.svg").default} alt="icon-arrowright-profilepage" />
+            </div>
+            <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-pointer">
+              <div className="fw-bold flex-grow-1" onClick={() => navigate("/main/change-password")}>Change Password</div>
+              <img src={require("../../../assets/img/icons/arrowright_profilepage.svg").default} alt="icon-arrowright-profilepage" />
+            </div>
+            <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-pointer">
+              <div className="fw-bold flex-grow-1" onClick={() => navigate("/main/change-pin")}>Change PIN</div>
+              <img src={require("../../../assets/img/icons/arrowright_profilepage.svg").default} alt="icon-arrowright-profilepage" />
+            </div>
+            <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-pointer">
+              <div onClick={handleLogout} className="fw-bold flex-grow-1">Logout</div>
+              <img src={require("../../../assets/img/icons/arrowright_profilepage.svg").default} alt="icon-arrowright-profilepage" />
+            </div>
+          </div>
         </article>
         <article className="bg-white rounded col ms-1">
           <div>contact info</div>
