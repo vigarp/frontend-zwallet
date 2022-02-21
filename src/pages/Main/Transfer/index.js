@@ -36,7 +36,7 @@ const Transfer = () => {
                 </div>
                 {contactsData?.data.map((item, index) => (
                     <div className="rounded row g-0 me-3 my-4 user-pointer" key={index} onClick={() => navigate(`/main/transfer/${item.id}`)}>
-                        <div className="col flex-grow-0 px-3"><img src={item.picture} width={60} height={60} alt='' /></div>
+                        <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt='' /></div>
                         <div className="col lh-lg">
                             <div className="fw-bold">{item.username}</div>
                             <div className="text-muted">{item.email}</div>
