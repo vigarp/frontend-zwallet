@@ -1,13 +1,15 @@
 // import internal modules
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // import external modules
+import { LoginUser } from '../../../redux/actions/login';
 import Input from '../../../components/base/Input';
 import Button from '../../../components/base/Button';
 
 const Login = () => {
+  const dispatch = useDispatch()
   // const navigate = useNavigate();
 
   const [formLogin, setFormLogin] = useState({
@@ -21,25 +23,7 @@ const Login = () => {
     })
   }
   const handleClick = () => {
-    axios.post(`${process.env.REACT_APP_URL_BACKEND}/login`,
-    {
-      email: formLogin.email,
-      password: formLogin.password
-    })
-    .then((res) => {
-      const tokenUser = res.data.data.token
-      localStorage.setItem('token', tokenUser)
-      alert(res.data.message)
-      window.location.replace("/main")
-    })
-    .catch((err) => {
-      console.log(err)
-      if (err.response.status === 403) {
-        alert(err.response.data.message)
-      } else {
-        alert('Internal Server Error')
-      }
-    })
+    dispatch((LoginUser(formLogin)))
   }
   return (
     <div className="my-5 mx-5">
