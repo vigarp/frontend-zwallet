@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
+import { editPic } from '../../../redux/actions/editPic';
 import './profile.css'
 
 const Profile = () => {
@@ -26,18 +27,22 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios({
-      method: 'PUT',
-      url: `http://localhost:4001/v1/users/${userDetailData.data.id}/picture`,
-      headers: { Authorization: 'Bearer ' + tokenUser },
-      data: formDataPic
+    dispatch((editPic(formDataPic)))
+    .then(() => {
+      dispatch((GetUserDetail()))
     })
-      .then(() => {
-        dispatch((GetUserDetail()))
-      })
-      .catch((err) => {
-        alert(err)
-      })
+    // axios({
+    //   method: 'PUT',
+    //   url: `http://localhost:4001/v1/users/${userDetailData.data.id}/picture`,
+    //   headers: { Authorization: 'Bearer ' + tokenUser },
+    //   data: formDataPic
+    // })
+    //   .then(() => {
+    //     dispatch((GetUserDetail()))
+    //   })
+    //   .catch((err) => {
+    //     alert(err)
+    //   })
   }
   return (
     <Fragment>
