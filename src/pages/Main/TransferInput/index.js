@@ -28,15 +28,41 @@ const TransferInput = () => {
     date: new Date(),
     notes: ''
   })
+  const [formInputError, setFormInputError] = useState({});
+
   const handleChange = (e) => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value
     })
   }
-  const handleClick = () => {
-    localStorage.setItem('tempTransfer', JSON.stringify(formInput))
-    navigate("/main/confirmation");
+
+  const validateInput = (values) => {
+    const errors = {};
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!values.amount) {
+      errors.amount = "Amounts is required";
+    }
+    if (!values.notes) {
+      errors.notes = "Notes is required";
+    }
+    return errors;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const resultValidate = validateInput(formInput);
+    setFormInputError(resultValidate);
+    handleClick(resultValidate)
+  }
+
+  const handleClick = (resultValidate) => {
+    if (balanceData?.data < formInput.amount) {
+      alert("Insufficient Balance")
+    } else if (Object.keys(resultValidate).length === 0) {
+      localStorage.setItem('tempTransfer', JSON.stringify(formInput))
+      navigate("/main/confirmation");
+    }
   }
   return (
     <Fragment>
@@ -59,6 +85,7 @@ const TransferInput = () => {
               className="border-0"
               placeholder="0.00"
               type="number" />
+            <div className="my-3 text-danger">{formInputError.amount}</div>
           </div>
           <div className="text-center fw-bold">Rp. {balanceData?.data} Available</div>
           <div className="text-center overflow-hidden my-3 mx-5 p-3">
@@ -70,8 +97,9 @@ const TransferInput = () => {
               className="mx-5 border-0"
               placeholder="For buying some socks"
               type="text" />
+            <div className="my-3 text-danger">{formInputError.notes}</div>
           </div>
-          <div className="d-flex justify-content-end"><button onClick={handleClick} type="submit" className="bg-primary bg-gradient w-25 rounded p-3 text-center">Continue</button></div>
+          <div className="d-flex justify-content-end"><button onClick={handleSubmit} type="submit" className="bg-primary bg-gradient w-25 rounded p-3 text-center">Continue</button></div>
         </div>
       </article>
     </Fragment>
