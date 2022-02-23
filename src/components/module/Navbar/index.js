@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './navbar.css';
 import { userContext } from '../../../context/UserContext';
 
-const Navbar = () => {
+const Navbar = ({openModal}) => {
     const {userName} = useContext(userContext);
     const {userPicture} = useContext(userContext);
     const {userEmail} = useContext(userContext);
@@ -20,7 +20,7 @@ const Navbar = () => {
                         <div className="fw-bold">{userName}</div>
                         <div>{userEmail}</div>
                     </div>
-                    <div className="user-pointer mt-2"><img src={require("../../../assets/img/icons/bell_homepage.png")} alt="icon-bell-homepage" /></div>
+                    <div className="user-pointer mt-2" onClick={()=>openModal()}><img src={require("../../../assets/img/icons/bell_homepage.png")} alt="icon-bell-homepage" /></div>
                 </div>
             </div>
         </nav>
