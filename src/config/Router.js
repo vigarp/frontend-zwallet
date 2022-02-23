@@ -24,6 +24,7 @@ import TopUp from "../pages/Main/TopUp";
 import Profile from "../pages/Main/Profile";
 import PersonalInformation from "../pages/Main/PersonalInformation";
 import ManagePhoneNumber from "../pages/Main/ManagePhoneNumber";
+import AddPhoneNumber from "../pages/Main/AddPhoneNumber";
 import ChangePassword from "../pages/Main/ChangePassword";
 import ChangePin from "../pages/Main/ChangePin";
 
@@ -52,6 +53,7 @@ const Router = () => {
                     <Route path="profile" element={<Profile />} />
                     <Route path="personal-information" element={<PersonalInformation />} />
                     <Route path="manage-phone-number" element={<ManagePhoneNumber />} />
+                    <Route path="add-phone-number" element={<AddPhoneNumber />} />
                     <Route path="change-password" element={<ChangePassword />} />
                     <Route path="change-pin" element={<ChangePin />} />
                     <Route index element={<Navigate to="/main/home" />} />
