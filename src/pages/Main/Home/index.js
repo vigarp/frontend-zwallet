@@ -1,53 +1,35 @@
 // import internal modules
-import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { decodeToken } from 'react-jwt'
+import {useDispatch, useSelector} from 'react-redux';
 
 // import external modules
 import BlueBox from '../../../components/module/BlueBox';
 import HistoryBox from '../../../components/module/HistoryBox';
-
+import { GetUserBalance } from '../../../redux/actions/balance';
+import { GetUserPhone } from '../../../redux/actions/phone';
+import { GetShortHistory } from '../../../redux/actions/shortHistory';
 
 const Home = () => {
-    const tokenUser = localStorage.getItem('token');
-    const userInfo = decodeToken(tokenUser);
-    const [balanceUser, setBalanceUser] = useState([]);
-    const [phoneUser, setPhoneUser] = useState([]);
-    const [sortHistory, setSortHistory] = useState([])
+    localStorage.removeItem('tempTransfer');
+    const dispatch = useDispatch();
+
+    const balanceData = useSelector((state) => state.balance);
+    const phoneData = useSelector((state) => state.phone);
+    const shortHistoryData = useSelector((state) => state.shortHistory);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
-            {
-                headers: {
-                    Authorization: 'Bearer ' + tokenUser
-                }
-            })
-            .then((res) => {
-                const resultBalance = res.data.data.balance;
-                const resultPhoneNumber = res.data.data.phone;
-                setBalanceUser(resultBalance);
-                setPhoneUser(resultPhoneNumber);
-            })
-    }, [])
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/history?limit=4`,
-            {
-                headers: {
-                    Authorization: 'Bearer ' + tokenUser
-                }
-            })
-            .then((res) => {
-                const resultShortHistory = res.data.data
-                setSortHistory(resultShortHistory)
-            })
-    }, [])
+        dispatch((GetUserBalance()))
+        dispatch((GetUserPhone()))
+        dispatch((GetShortHistory()))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <Fragment>
             <main className="bg-primary rounded row g-0 p-4">
                 <BlueBox
-                    balanceUser={balanceUser}
-                    phoneUser={phoneUser}></BlueBox>
+                    balanceUser={balanceData?.data}
+                    phoneUser={phoneData?.data}></BlueBox>
                 <div className="col flex-grow-0 my-3">
                     <Link to={"/main/topup"} style={{ textDecoration: 'none', color: 'black' }}><div className="d-flex px-2 py-2 bg-light bg-gradient rounded my-3">
                         <img src={require("../../../assets/img/icons/arrowup_blue_homepage.svg").default} alt="" />
@@ -78,7 +60,7 @@ const Home = () => {
                         <div className="text-decoration-none"><Link to={"/main/history"} style={{ textDecoration: 'none' }}>See All</Link></div>
                         </div>
                     </div>
-                    {sortHistory.map((item, index) => (
+                    {shortHistoryData?.data.map((item, index) => (
                         <HistoryBox
                             key={index}
                             picture={item.picture}

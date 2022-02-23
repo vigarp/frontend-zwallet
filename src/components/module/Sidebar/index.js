@@ -1,15 +1,15 @@
 // import internal modules
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // import external modules
 import './sidebar.css';
 
 const Sidebar = () => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const handleLogout = () => {
         localStorage.removeItem('token')
-        navigate('/auth/login')
+        window.location.reload('/auth/login')
     }
     return (
         <aside className="bg-white rounded w-25 d-flex flex-column justify-content-between p-3 me-3">

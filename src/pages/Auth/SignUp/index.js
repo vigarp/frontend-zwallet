@@ -1,12 +1,15 @@
 // import internal modules
-import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // import external modules
+import { SignUpUser } from '../../../redux/actions/signUp';
 import Input from '../../../components/base/Input';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [formSignUp, setFormSignUp] = useState({
     username: '',
     email: '',
@@ -19,23 +22,27 @@ const SignUp = () => {
     })
   }
   const handleClick = () => {
-    axios.post(`${process.env.REACT_APP_URL_BACKEND}/register`,
-    {
-      username: formSignUp.username,
-      email: formSignUp.email,
-      password: formSignUp.password
-    })
-    .then((res) => {
-      console.log(res.data.message)
-    })
-    .catch((err) => {
-      console.log(err)
-      if (err.response.status === 403) {
-        alert(err.response.data.message)
-      } else {
-        alert('Internal Server Error')
-      }
-    })
+    dispatch((SignUpUser(formSignUp)))
+    // axios.post(`${process.env.REACT_APP_URL_BACKEND}/register`,
+    // {
+    //   username: formSignUp.username,
+    //   email: formSignUp.email,
+    //   password: formSignUp.password
+    // })
+    // .then((res) => {
+    //   const message = res.data.message
+    //   alert(message)
+
+    //   console.log(res.data.message)
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    //   if (err.response.status === 403) {
+    //     alert(err.response.data.message)
+    //   } else {
+    //     alert('Internal Server Error')
+    //   }
+    // })
   }
   return (
     <div className="my-5 mx-5">

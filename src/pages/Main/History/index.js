@@ -1,28 +1,18 @@
 // import internal modules
-import React, {Fragment, useEffect, useState} from 'react';
-import axios from 'axios';
-import { decodeToken } from 'react-jwt';
+import React, {Fragment, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// import external modules
+import { GetUserHistory } from '../../../redux/actions/history';
 
 const History = () => {
-  const tokenUser = localStorage.getItem('token');
-  const userInfo = decodeToken(tokenUser);
+  const dispatch = useDispatch();
 
-  const [history, setHistory] = useState([])
+  const historyData = useSelector((state) => state.history);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/history?limit=5`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const resultHistory = res.data.data;
-      setHistory(resultHistory);
-    })
-    .catch((err) => {
-      console.log(err.response)
-    })
+    dispatch((GetUserHistory()));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const colorMoney = (type_detail) => {
@@ -39,7 +29,7 @@ const topUpName = (type_detail) => {
     <Fragment>
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transactions History</div>
-                {history.map((item, index) => (
+                {historyData?.data.map((item, index) => (
                     <div className="row g-0 me-3 my-4" key={index}>
                         <div className="col flex-grow-0 px-3"><img src={topUpPic(item.type_detail) ? topUpPic(item.type_detail) : item.picture} width={60} height={60} alt="" /></div>
                         <div className="col lh-lg">

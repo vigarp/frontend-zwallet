@@ -1,67 +1,33 @@
 // import internal modules
 import React, {Fragment, useEffect, useState} from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import {decodeToken} from 'react-jwt';
+import { useDispatch, useSelector } from 'react-redux';
+
+// import external modules
+import { PostTransfer } from '../../../redux/actions/transfer';
+import { GetTransferDetail } from '../../../redux/actions/transferDetail';
+import { GetUserBalance } from '../../../redux/actions/balance';
 
 const Confirmation = () => {
-  const navigate = useNavigate();
-  const tokenUser = localStorage.getItem('token');
-  const userInfo = decodeToken(tokenUser);
+  const dispatch = useDispatch();
 
   const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
-  const [detailPerson, setDetailPerson] = useState([]);
-  const [balanceLeft, setBalanceLeft] = useState([]);
+  const detailPersonData = useSelector((state) => state.transferDetail);
+  const balanceData = useSelector((state) => state.balance);
+  // eslint-disable-next-line no-unused-vars
   const [formInput, setFormInput] = useState({
     receiver: transferDetail.receiver,
     amount: transferDetail.amount,
     notes: transferDetail.notes
   })
-
+  
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${transferDetail.receiver}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const resultReceiver = res.data.data;
-      setDetailPerson(resultReceiver);
-    })
-    .catch((err) => {
-      console.log(err.response)
-    })
-  }, []);
-
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      const userBalanceLeft = res.data.data.balance;
-      setBalanceLeft(userBalanceLeft - transferDetail.amount);
-    })
+    dispatch((GetTransferDetail(transferDetail)))
+    dispatch((GetUserBalance()))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = () => {
-    axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/${userInfo.id}/transfer`,
-    {
-      receiver: formInput.receiver,
-      amount: formInput.amount,
-      notes: formInput.notes
-    }, {
-      headers: {
-        Authorization: 'Bearer ' + tokenUser
-      }
-    })
-    .then((res) => {
-      alert(res.data.message);
-      navigate("/main/transfer-success");
-    })
+    dispatch((PostTransfer(formInput)))
   }
 
   return (
@@ -69,10 +35,10 @@ const Confirmation = () => {
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transfer To</div>
                 <div className="rounded py-3 bg-light row my-3">
-                    <div className="col flex-grow-0 px-3"><img src={detailPerson.picture} width={60} height={60} alt="" /></div>
+                    <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="" /></div>
                     <div className="col my-3">
-                        <div className="fw-bold">{detailPerson.username}</div>
-                        <div className="text-muted">{detailPerson.email}</div>
+                        <div className="fw-bold">{detailPersonData.data?.username}</div>
+                        <div className="text-muted">{detailPersonData.data?.email}</div>
                     </div>
                 </div>
                 <div className="g-0 ps-3 fw-bold my-5">Details</div>
@@ -85,7 +51,7 @@ const Confirmation = () => {
                 <div className="row g-0 me-3 my-4">
                     <div className="col lh-lg ps-3">
                         <div className="text-muted">Balance Left</div>
-                        <div className="fw-bold">Rp. {balanceLeft}</div>
+                        <div className="fw-bold">Rp. {balanceData?.data - transferDetail.amount}</div>
                     </div>
                 </div>
                 <div className="row g-0 me-3 my-4">
