@@ -35,8 +35,23 @@ const Modal = () => {
     return (
         <div className="bg-white rounded w-25 shadow modal-notif">
             {/* nofikasi informasi */}
-
+            <div className="text-muted text-start">Notification Information</div>
+            <div className="d-flex">
+                <img className="my-3" src={require("../../../assets/img/icons/globe-admin-modal.png")} width={50} height={50} alt="icon-globe-modal" />
+                <div className="d-flex flex-column ms-3 my-3">
+                    <div className="text-muted text-start">Zwallet System Information</div>
+                    <div className="fw-bold text-start">Service Back to Normal</div>
+                </div>
+            </div>
+            <div className="d-flex">
+                <img className="my-3" src={require("../../../assets/img/icons/globe-admin-modal.png")} width={50} height={50} alt="icon-globe-modal" />
+                <div className="d-flex flex-column ms-3 my-3">
+                    <div className="text-muted text-start">Zwallet System Information</div>
+                    <div className="fw-bold text-start">Perfomance Degraded due Maintenance System</div>
+                </div>
+            </div>
             {/* notifikasi transaksi */}
+            <div className="text-muted text-start">Notification Transaction</div>
             {shortHistoryData?.data.map((item, index) => (
                 <div className="d-flex" key={index}>
                     <img src={transactionPic(item.type_detail)} alt="icon-arrows-modal" />
