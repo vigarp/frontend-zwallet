@@ -38,7 +38,7 @@ export const editPic = (formDataPic) => {
         })
         .catch((err) => {
             const message = err.message
-            dispatch(editPic(message))
+            dispatch(editPicError(message))
         })
     }
 }

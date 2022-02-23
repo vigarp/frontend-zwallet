@@ -39,7 +39,6 @@ const TransferInput = () => {
 
   const validateInput = (values) => {
     const errors = {};
-    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (!values.amount) {
       errors.amount = "Amounts is required";
     }
