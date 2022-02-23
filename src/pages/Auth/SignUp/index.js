@@ -66,7 +66,8 @@ const SignUp = () => {
           name="username"
           placeholder="Enter your username"
           onChange={handleChange}
-          value={formSignUp.username} />
+          value={formSignUp.username}
+          className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
         <div className="position-absolute text-danger handle-error">{formSignUpError.username}</div>
         <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/mail_loginpage.svg").default} alt="icon-mail-loginpage" /></div>
         <Input
@@ -74,7 +75,8 @@ const SignUp = () => {
           name="email"
           placeholder="Enter your e-mail"
           onChange={handleChange}
-          value={formSignUp.email} />
+          value={formSignUp.email}
+          className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
         <div className="position-absolute text-danger handle-error">{formSignUpError.email}</div>
         <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/lock_loginpage.svg").default} alt="icon-lock-loginpage" /></div>
         <Input
@@ -82,7 +84,8 @@ const SignUp = () => {
           name="password"
           placeholder="Enter your password"
           onChange={handleChange}
-          value={formSignUp.password} />
+          value={formSignUp.password}
+          className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
         <div className="position-absolute text-danger handle-error">{formSignUpError.password}</div>
         <button onClick={handleSubmit} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-100 rounded-3 mt-3 fw-bold">Sign Up</button>
         <div className="text-center mt-3">Already have an account? Let's <Link to={"/auth/login"} style={{ textDecoration: 'none' }}>Login</Link></div>

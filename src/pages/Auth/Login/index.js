@@ -66,7 +66,8 @@ const Login = () => {
           name="email"
           placeholder="Enter your e-mail"
           onChange={handleChange}
-          value={formLogin.email} />
+          value={formLogin.email}
+          className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
         <div className="position-absolute text-danger handle-error">{formLoginError.email}</div>
         <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/lock_loginpage.svg").default} alt="icon-lock-loginpage" /></div>
         <Input
@@ -74,7 +75,8 @@ const Login = () => {
           name="password"
           placeholder="Enter your password"
           onChange={handleChange}
-          value={formLogin.password} />
+          value={formLogin.password}
+          className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
           <div className="position-absolute text-danger handle-error">{formLoginError.password}</div>
         <div className="text-end"><Link to={"/auth/forgot-password"} style={{ textDecoration: 'none' }}>Forgot Password?</Link></div>
         <Button isLoading={undefined} onClick={handleSubmit} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-100 rounded-3 mt-5 fw-bold">Login</Button>
