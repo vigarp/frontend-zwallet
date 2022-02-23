@@ -23,6 +23,7 @@ import TransferSuccess from "../pages/Main/TransferSuccess";
 import TopUp from "../pages/Main/TopUp";
 import Profile from "../pages/Main/Profile";
 import PersonalInformation from "../pages/Main/PersonalInformation";
+import ManagePhoneNumber from "../pages/Main/ManagePhoneNumber";
 import ChangePassword from "../pages/Main/ChangePassword";
 import ChangePin from "../pages/Main/ChangePin";
 
@@ -50,6 +51,7 @@ const Router = () => {
                     <Route path="topup" element={<TopUp />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="personal-information" element={<PersonalInformation />} />
+                    <Route path="manage-phone-number" element={<ManagePhoneNumber />} />
                     <Route path="change-password" element={<ChangePassword />} />
                     <Route path="change-pin" element={<ChangePin />} />
                     <Route index element={<Navigate to="/main/home" />} />
