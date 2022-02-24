@@ -14,7 +14,8 @@ import login from './login';
 import editPic from './editPic';
 import transferDetail from './transferDetail';
 import signUp from './signUp';
-import editPhone from './editPhone'
+import editPhone from './editPhone';
+import editPassword from './editPassword';
 
 const rootReducers = combineReducers({
     contacts,
@@ -29,7 +30,8 @@ const rootReducers = combineReducers({
     editPic,
     transferDetail,
     signUp,
-    editPhone
+    editPhone,
+    editPassword
 
 
 })
