@@ -1,14 +1,12 @@
 // import internal modules
-import React, { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Fragment, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 // import external modules
 import { editPhone } from '../../../redux/actions/editPhone';
 
 const EditPhoneNumber = () => {
   const dispatch = useDispatch();
-
-
 
   const [formInput, setFormInput] = useState({
     phone: ''

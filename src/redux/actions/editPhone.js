@@ -35,10 +35,12 @@ export const editPhone = (formDataPhone) => {
         .then((res) => {
             const resultEditPhone = res.data?.message
             dispatch(editPhoneResponse(resultEditPhone))
+            alert(resultEditPhone)
         })
         .catch((err) => {
             const message = err.message
             dispatch(editPhoneError(message))
+            alert(message)
         })
     }
 }
