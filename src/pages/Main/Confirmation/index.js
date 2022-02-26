@@ -1,37 +1,39 @@
 // import internal modules
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import external modules
 import { PostTransfer } from '../../../redux/actions/transfer';
 import { GetTransferDetail } from '../../../redux/actions/transferDetail';
 import { GetUserBalance } from '../../../redux/actions/balance';
+import socket from '../../../helpers/socket';
 
 const Confirmation = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
-  const detailPersonData = useSelector((state) => state.transferDetail);
-  const balanceData = useSelector((state) => state.balance);
-  // eslint-disable-next-line no-unused-vars
-  const [formInput, setFormInput] = useState({
-    receiver: transferDetail.receiver,
-    amount: transferDetail.amount,
-    notes: transferDetail.notes
-  })
-  
-  useEffect(() => {
-    dispatch((GetTransferDetail(transferDetail)))
-    dispatch((GetUserBalance()))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
+    const detailPersonData = useSelector((state) => state.transferDetail);
+    const balanceData = useSelector((state) => state.balance);
+    // eslint-disable-next-line no-unused-vars
+    const [formInput, setFormInput] = useState({
+        receiver: transferDetail.receiver,
+        amount: transferDetail.amount,
+        notes: transferDetail.notes
+    })
 
-  const handleClick = () => {
-    dispatch((PostTransfer(formInput)))
-  }
+    useEffect(() => {
+        dispatch((GetTransferDetail(transferDetail)))
+        dispatch((GetUserBalance()))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  return (
-    <Fragment>
+    const handleClick = () => {
+        dispatch((PostTransfer(formInput)))
+        socket.emit('sendTip', formInput);
+    }
+
+    return (
+        <Fragment>
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transfer To</div>
                 <div className="rounded py-3 bg-light row my-3">
@@ -71,7 +73,7 @@ const Confirmation = () => {
                 </div>
             </article>
         </Fragment>
-  )
+    )
 }
 
 export default Confirmation

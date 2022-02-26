@@ -2,6 +2,9 @@
 import axios from "axios";
 import { decodeToken } from "react-jwt";
 
+// import external modules
+import socket from "../../helpers/socket";
+
 const tokenUser = localStorage.getItem('token');
 const userInfo = decodeToken(tokenUser);
 
@@ -38,8 +41,9 @@ export const PostTransfer = (transferData) => {
         })
         .then((res) => {
             const resultTransfer = res.data?.message
-            dispatch(PostTransferResponse(resultTransfer))
-            window.location.replace("transfer-success")
+            // dispatch(PostTransferResponse(resultTransfer))
+            // socket.emit('sendTip',  'text')
+            // window.location.replace("transfer-success")
         })
         .catch((err) => {
             const message = err.message

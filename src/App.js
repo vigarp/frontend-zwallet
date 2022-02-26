@@ -7,11 +7,11 @@ import Router from './config/Router'
 
 // create function for App.js
 function App() {
-  useEffect(() => {
-    socket.on('message for new user', (message) => {
-      alert(message)
-    })
-  }, [])
+  // useEffect(() => {
+  //   socket.on('message for new user', (message) => {
+  //     alert(message)
+  //   })
+  // }, [])
   return (
     <Router />
   );

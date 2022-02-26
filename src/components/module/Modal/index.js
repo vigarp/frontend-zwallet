@@ -1,8 +1,10 @@
 // import internal modules
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 // import external modules
+import socket from '../../../helpers/socket';
 import { GetShortHistory } from '../../../redux/actions/shortHistory';
 import './modal.css';
 
@@ -11,9 +13,10 @@ const Modal = () => {
 
     const shortHistoryData = useSelector((state) => state.shortHistory);
 
-    useEffect(() => {
-        dispatch((GetShortHistory()))
-    }, [])
+    // useEffect(() => {
+    //     dispatch((GetShortHistory()))
+    // }, [])
+
     const transactionPic = (type_detail) => {
         if (type_detail === "Topup" || type_detail === "Transfer In") {
             return require("../../../assets/img/icons/arrowdown-modal.svg").default
@@ -31,7 +34,9 @@ const Modal = () => {
             return "Transfered to"
         }
     }
-    console.log(shortHistoryData.data)
+    socket.on('sendTip', (data) => {
+        console.log(data)
+    })
     return (
         <div className="bg-white rounded w-25 shadow modal-notif">
             {/* nofikasi informasi */}
