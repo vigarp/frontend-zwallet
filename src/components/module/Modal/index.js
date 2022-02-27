@@ -39,8 +39,6 @@ const Modal = () => {
             return "Transfered to"
         }
     }
-
-    console.log(admInfo)
     return (
         <div className="bg-white rounded w-25 shadow modal-notif">
             {/* nofikasi informasi */}

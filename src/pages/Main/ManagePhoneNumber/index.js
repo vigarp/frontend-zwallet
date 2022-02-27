@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
+import { deletePhone } from '../../../redux/actions/deletePhone';
 
 const ManagePhoneNumber = () => {
   const navigate = useNavigate();
@@ -16,6 +17,13 @@ const ManagePhoneNumber = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleClick = () => {
+    dispatch((deletePhone()))
+    .then(() => {
+      dispatch((GetUserDetail()))
+    })
+  }
+
   return (
     <Fragment>
       <article className="bg-white rounded g-0 p-4">
@@ -24,11 +32,16 @@ const ManagePhoneNumber = () => {
           <div className="g-0 ps-3 my-3 text-muted">You can only delete the phone number and then<br />you must add another phone number.</div>
         </div>
         <div className="rounded p-3 d-flex g-0 me-3 my-4">
-          <div className="lh-lg ps-3 flex-grow-1 user-pointer" onClick={() => navigate("/main/edit-phone-number")}>
+          <div className="lh-lg ps-3 flex-grow-1">
             <div className="text-muted">Primary</div>
-            <div className="fw-bold">{userDetailData.data?.phone}</div>
+            {userDetailData.data.phone ? (
+              <div className="fw-bold">{userDetailData.data?.phone}</div>
+            ) : (
+              <div className="user-pointer" onClick={() => navigate("/main/edit-phone-number")}>Add Phone Number</div>
+            )}
+            
           </div>
-          <img src={require("../../../assets/img/icons/trash_managephonenumberpage.svg").default} alt="icon-trash-managephonenumberpage" />
+          <div onClick={handleClick} className="user-pointer"><img src={require("../../../assets/img/icons/trash_managephonenumberpage.svg").default} alt="icon-trash-managephonenumberpage" /></div>
         </div>
       </article>
     </Fragment>
