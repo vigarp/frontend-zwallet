@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 // import external modules
 import LandingPage from "../pages";
+import Admin from "../pages/Admin/"
 import Page404 from "../pages/404";
 
 import Auth from "../pages/Auth";
@@ -33,6 +34,8 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/admin" element={<Admin />} />
+
                 <Route path="/auth" element={<Auth />}>
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />

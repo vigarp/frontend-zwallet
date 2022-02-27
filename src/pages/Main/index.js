@@ -10,7 +10,7 @@ import Modal from '../../components/module/Modal';
 
 const Main = () => {
   const auth = localStorage.getItem('token');
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(true)
 
   const openModal = () => {
     if (showModal === false ) {

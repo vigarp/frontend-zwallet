@@ -16,9 +16,9 @@ const Confirmation = () => {
     const balanceData = useSelector((state) => state.balance);
     // eslint-disable-next-line no-unused-vars
     const [formInput, setFormInput] = useState({
-        receiver: transferDetail.receiver,
-        amount: transferDetail.amount,
-        notes: transferDetail.notes
+        picture: require("../../../assets/img/icons/globe-admin-modal.png"),
+        admin: 'isadmin',
+        info: 'Zwallet mainetenance on progress'
     })
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Confirmation = () => {
     }, []);
 
     const handleClick = () => {
-        dispatch((PostTransfer(formInput)))
+        // dispatch((PostTransfer(formInput)))
         socket.emit('sendTip', formInput);
     }
 
