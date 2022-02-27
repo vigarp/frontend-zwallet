@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { PostTransfer } from '../../../redux/actions/transfer';
 import { GetTransferDetail } from '../../../redux/actions/transferDetail';
 import { GetUserBalance } from '../../../redux/actions/balance';
+import socket from '../../../helpers/socket';
 
 const Confirmation = () => {
     const dispatch = useDispatch();

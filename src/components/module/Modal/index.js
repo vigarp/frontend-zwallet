@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // import external modules
 import socket from '../../../helpers/socket';
 import { GetShortHistory } from '../../../redux/actions/shortHistory';
-import './modal.css';
 
 const Modal = () => {
     const dispatch = useDispatch();
