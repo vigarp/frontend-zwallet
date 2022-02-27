@@ -1,6 +1,7 @@
 // import internal modules
 import React, { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import Input from '../../../components/base/Input';
@@ -9,6 +10,7 @@ import './changepassword.css';
 
 const PersonalInformation = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [formPassword, setFormPassword] = useState({
     oldPassword: '',
@@ -57,6 +59,9 @@ const PersonalInformation = () => {
     if (Object.keys(resultValidate).length === 0) {
       console.log('ini form pass', formPassword)
       dispatch((editPassword(formPassword)))
+      .then(() => {
+        navigate(-1)
+      })
     }
   }
 

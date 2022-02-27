@@ -19,8 +19,7 @@ const ModalPic = ({ openModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch((editPic(formDataPic)))
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         dispatch((GetUserDetail()))
         openModal(false)
       })

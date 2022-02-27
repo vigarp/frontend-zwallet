@@ -1,12 +1,14 @@
 // import internal modules
 import React, { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import { editPhone } from '../../../redux/actions/editPhone';
 
 const EditPhoneNumber = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [formInput, setFormInput] = useState({
     phone: ''
@@ -40,6 +42,9 @@ const EditPhoneNumber = () => {
   const handleClick = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
       dispatch((editPhone(formInput)))
+      .then(() => {
+        navigate(-1)
+      })
     }
   }
   return (
