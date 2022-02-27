@@ -19,7 +19,7 @@ export const LoginUserError = (error) => {
     }
 }
 
-export const LoginUser = (loginData) => {
+export const LoginUser = (loginData, setLoading) => {
     return (dispatch) => {
         dispatch(LoginUserRequest())
         return axios({
@@ -31,6 +31,7 @@ export const LoginUser = (loginData) => {
             }
         })
             .then((res) => {
+                setLoading(false)
                 const tokenUser = res.data?.data.token
                 const resultLogin = res.data?.message
                 localStorage.setItem('token', tokenUser)
@@ -38,6 +39,7 @@ export const LoginUser = (loginData) => {
                 window.location.replace("/main")
             })
             .catch((err) => {
+                setLoading(false)
                 const message = err.message
                 dispatch(LoginUserError(message))
                 if (err.response.status === 403) {

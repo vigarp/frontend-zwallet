@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import { editPhone } from '../../../redux/actions/editPhone';
+import Button from '../../../components/base/Button';
 
 const EditPhoneNumber = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const EditPhoneNumber = () => {
     phone: ''
   })
   const [formInputError, setForminputError] = useState({});
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormInput({
@@ -41,7 +43,8 @@ const EditPhoneNumber = () => {
 
   const handleClick = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
-      dispatch((editPhone(formInput)))
+      setLoading(true)
+      dispatch((editPhone(formInput, setLoading)))
       .then(() => {
         navigate(-1)
       })
@@ -66,7 +69,7 @@ const EditPhoneNumber = () => {
               type="text" />
             <div className="my-3 text-danger">{formInputError.phone}</div>
           </div>
-          <div className="d-flex justify-content-center"><button onClick={handleSubmit} type="submit" className="bg-secondary bg-gradient w-25 rounded p-3 text-center">Add Phone Number</button></div>
+          <div className="d-flex justify-content-center"><Button isLoading={loading} onClick={handleSubmit} type="submit" className="bg-secondary bg-gradient w-25 rounded p-3 text-center">Add Phone Number</Button></div>
         </div>
       </article>
     </Fragment>

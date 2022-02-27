@@ -1,6 +1,7 @@
 // import internal modules
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import { PostTransfer } from '../../../redux/actions/transfer';
@@ -9,6 +10,7 @@ import { GetUserBalance } from '../../../redux/actions/balance';
 
 const Confirmation = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
     const detailPersonData = useSelector((state) => state.transferDetail);
@@ -27,7 +29,7 @@ const Confirmation = () => {
     }, []);
 
     const handleClick = () => {
-        dispatch((PostTransfer(formInput)))
+        dispatch((PostTransfer(formInput, navigate)))
     }
 
     return (

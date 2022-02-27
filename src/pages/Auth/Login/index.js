@@ -17,6 +17,7 @@ const Login = () => {
     password: ''
   })
   const [formLoginError, setFormLoginError] = useState({});
+  const [loading, setLoading] = useState(false)
   
   const handleChange = (e) => {
     setFormLogin({
@@ -50,7 +51,8 @@ const Login = () => {
 
   const handleClick = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
-      dispatch((LoginUser(formLogin)))
+      setLoading(true)
+      dispatch((LoginUser(formLogin, setLoading)))
     }
   }
   return (
@@ -79,7 +81,7 @@ const Login = () => {
           className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
           <div className="position-absolute text-danger handle-error">{formLoginError.password}</div>
         <div className="text-end"><Link to={"/auth/forgot-password"} style={{ textDecoration: 'none' }}>Forgot Password?</Link></div>
-        <Button isLoading={undefined} onClick={handleSubmit} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-100 rounded-3 mt-5 fw-bold">Login</Button>
+        <Button isLoading={loading} onClick={handleSubmit} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-100 rounded-3 mt-5 fw-bold">Login</Button>
         <div className="text-center mt-3">Don't have an account? Let's <Link to={"/auth/signup"} style={{ textDecoration: 'none' }}> Sign Up</Link></div>
       </div>
     </div>

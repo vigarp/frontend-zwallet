@@ -23,7 +23,7 @@ export const editPicError = (error) => {
     }
 }
 
-export const editPic = (formDataPic) => {
+export const editPic = (formDataPic, setLoading) => {
     return (dispatch) => {
         dispatch(editPicRequest())
         return axios({
@@ -33,11 +33,13 @@ export const editPic = (formDataPic) => {
             headers: {Authorization: 'Bearer ' + tokenUser}
         })
         .then((res) => {
+            setLoading(false)
             const resultEditPic = res.data?.message
             alert(resultEditPic)
             dispatch(editPicResponse(resultEditPic))
         })
         .catch((err) => {
+            setLoading(false)
             const message = err.message
             dispatch(editPicError(message))
         })

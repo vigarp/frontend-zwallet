@@ -25,7 +25,7 @@ export const PostTransferError = (error) => {
     }
 }
 
-export const PostTransfer = (transferData) => {
+export const PostTransfer = (transferData, navigate) => {
     return (dispatch) => {
         dispatch(PostTransferRequest())
         return axios({
@@ -41,12 +41,12 @@ export const PostTransfer = (transferData) => {
         .then((res) => {
             const resultTransfer = res.data?.message
             dispatch(PostTransferResponse(resultTransfer))
-            window.location.replace("transfer-success")
+            navigate("/main/transfer-success/", {replace: true})
         })
         .catch((err) => {
             const message = err.message
             dispatch(PostTransferError(message))
-            window.location.replace("transfer-failed")
+            navigate("/main/transfer-failed", {replace: true})
         })
     }
 }

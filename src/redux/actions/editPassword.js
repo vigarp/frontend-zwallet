@@ -23,7 +23,7 @@ export const editPasswordError = (error) => {
     }
 }
 
-export const editPassword = (formDataPassword) => {
+export const editPassword = (formDataPassword, setLoading, navigate) => {
     return (dispatch) => {
         dispatch(editPasswordRequest())
         return axios({
@@ -33,11 +33,14 @@ export const editPassword = (formDataPassword) => {
             headers: {Authorization: 'Bearer ' + tokenUser}
         })
         .then((res) => {
+            setLoading(false)
             const resultEditPassword = res.data?.message
             dispatch(editPasswordResponse(resultEditPassword))
             alert(resultEditPassword)
+            navigate(-1)
         })
         .catch((err) => {
+            setLoading(false)
             const message = err.response.data?.message
             dispatch(editPasswordError(message))
             alert(err.response.data.message)

@@ -23,7 +23,7 @@ export const editPhoneError = (error) => {
     }
 }
 
-export const editPhone = (formDataPhone) => {
+export const editPhone = (formDataPhone, setLoading) => {
     return (dispatch) => {
         dispatch(editPhoneRequest())
         return axios({
@@ -33,11 +33,13 @@ export const editPhone = (formDataPhone) => {
             headers: {Authorization: 'Bearer ' + tokenUser}
         })
         .then((res) => {
+            setLoading(false)
             const resultEditPhone = res.data?.message
             dispatch(editPhoneResponse(resultEditPhone))
             alert(resultEditPhone)
         })
         .catch((err) => {
+            setLoading(false)
             const message = err.message
             dispatch(editPhoneError(message))
             alert(message)

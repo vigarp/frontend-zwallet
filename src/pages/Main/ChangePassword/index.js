@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import Input from '../../../components/base/Input';
+import Button from '../../../components/base/Button';
 import { editPassword } from '../../../redux/actions/editPassword';
 import './changepassword.css';
 
@@ -18,6 +19,8 @@ const PersonalInformation = () => {
     reNewPassword: ''
   })
   const [formPasswordError, setFormPasswordErrror] = useState({});
+
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormPassword({
@@ -57,11 +60,8 @@ const PersonalInformation = () => {
 
   const handleClick = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
-      console.log('ini form pass', formPassword)
-      dispatch((editPassword(formPassword)))
-      .then(() => {
-        navigate(-1)
-      })
+      setLoading(true)
+      dispatch((editPassword(formPassword, setLoading, navigate)))
     }
   }
 
@@ -100,7 +100,7 @@ const PersonalInformation = () => {
             value={formPassword.reNewPassword}
             className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-75" />
           <div className="position-absolute text-danger handle-error">{formPasswordError.reNewPassword}</div>
-          <div className="d-flex justify-content-end"><button onClick={handleSubmit} type="submit" className="bg-primary bg-gradient w-25 rounded p-3 text-center">Change</button></div>
+          <div className="d-flex justify-content-end"><Button isLoading={loading} onClick={handleSubmit} type="submit" className="bg-primary bg-gradient w-25 rounded p-3 text-center">Change</Button></div>
         </div>
       </article>
     </Fragment>

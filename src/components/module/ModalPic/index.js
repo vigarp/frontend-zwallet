@@ -5,10 +5,13 @@ import { useDispatch } from 'react-redux';
 // import external modules
 import { editPic } from '../../../redux/actions/editPic';
 import { GetUserDetail } from '../../../redux/actions/user';
+import Button from '../../../components/base/Button';
 import './modalpic.css'
 
 const ModalPic = ({ openModal }) => {
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
 
   const [formDataPicTemp, setFormDataPicTemp] = useState({
     picture: ""
@@ -18,7 +21,8 @@ const ModalPic = ({ openModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch((editPic(formDataPic)))
+    setLoading(true)
+    dispatch((editPic(formDataPic, setLoading)))
       .then(() => {
         dispatch((GetUserDetail()))
         openModal(false)
@@ -37,7 +41,7 @@ const ModalPic = ({ openModal }) => {
         <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)} className="d-flex flex-column">
           <input type="file" onChange={(e) => setFormDataPicTemp({ ...formDataPicTemp, picture: e.currentTarget.files })} /><br />
           <hr />
-          <button className="my-3 bg-primary bg-gradient px-3" type="submit">Upload</button>
+          <Button isLoading={loading} className="my-3 bg-primary bg-gradient px-3" type="submit">Upload</Button>
         </form>
       </div>
     </div>
