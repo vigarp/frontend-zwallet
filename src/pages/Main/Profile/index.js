@@ -43,9 +43,9 @@ const Profile = () => {
     <Fragment>
       <main className="bg-white rounded g-0 p-4 d-flex flex-column align-items-center">
         <div className="upper mt-5">
-          <img className="rounded" src={userDetailData.data?.picture} height={80} width={80} alt="" />
+          <img className="rounded" src={userDetailData.data?.picture} height={80} width={80} alt="pic-detail-user" />
           <div className="d-flex mt-3 user-pointer">
-            <img className="ms-1" src={require("../../../assets/img/icons/edit-edit-profile-page.svg").default} alt="" />
+            <img className="ms-1" src={require("../../../assets/img/icons/edit-edit-profile-page.svg").default} alt="icon-edit-profile" />
             <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
               <input type="file" onChange={(e) => setFormDataPicTemp({ ...formDataPicTemp, picture: e.currentTarget.files })} /><br />
               <button type="submit">upload</button>
@@ -90,7 +90,7 @@ const Profile = () => {
           </div>
           {contactsData?.data.map((item, index) => (
           <div className="row g-0 me-3 my-4 user-pointer" key={index} onClick={() => navigate(`/main/transfer/${item.id}`)}>
-            <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt="" /></div>
+            <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt="pic-detail-user" /></div>
             <div className="col lh-lg">
               <div className="fw-bold">{item.username}</div>
               <div className="text-muted">{item.phone}</div>

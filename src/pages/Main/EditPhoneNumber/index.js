@@ -51,7 +51,7 @@ const EditPhoneNumber = () => {
         </div>
         <div className="my-5">
           <div className="text-center overflow-hidden my-3 mx-5 p-3">
-            <img className="position-absolute mt-1" src={require("../../../assets/img/icons/phone_addphonenumberpage.svg").default} alt="" />
+            <img className="position-absolute mt-1" src={require("../../../assets/img/icons/phone_addphonenumberpage.svg").default} alt="icon-addphonenumber-page" />
             <input
               onChange={handleChange}
               name="phone"

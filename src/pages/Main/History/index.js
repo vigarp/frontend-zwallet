@@ -31,7 +31,7 @@ const topUpName = (type_detail) => {
                 <div className="g-0 ps-3 fw-bold">Transactions History</div>
                 {historyData?.data.map((item, index) => (
                     <div className="row g-0 me-3 my-4" key={index}>
-                        <div className="col flex-grow-0 px-3"><img src={topUpPic(item.type_detail) ? topUpPic(item.type_detail) : item.picture} width={60} height={60} alt="" /></div>
+                        <div className="col flex-grow-0 px-3"><img src={topUpPic(item.type_detail) ? topUpPic(item.type_detail) : item.picture} width={60} height={60} alt="icon-type-detail" /></div>
                         <div className="col lh-lg">
                             <div className="fw-bold">{topUpName(item.type_detail) ? topUpName(item.type_detail) : item.username}</div>
                             <div className="text-muted">{item.type_detail}</div>

@@ -1,7 +1,6 @@
 // import internal modules
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 // import external modules
 import socket from '../../../helpers/socket';
@@ -20,6 +19,7 @@ const Modal = () => {
 
     useEffect(() => {
         dispatch((GetShortHistory()))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const transactionPic = (type_detail) => {
@@ -50,18 +50,11 @@ const Modal = () => {
                 <img className="my-3" src={item.picture} width={50} height={50} alt="icon-globe-modal" />
                 <div className="d-flex flex-column ms-3 my-3">
                     <div className="text-muted text-start">{item.admin}</div>
-                    <div className="fw-bold text-start">{item.info}</div>
+                    <div className="fw-bold text-start">{item.message}</div>
                 </div>
             </div>
                 
             ))}
-            {/* <div className="d-flex">
-                <img className="my-3" src={require("../../../assets/img/icons/globe-admin-modal.png")} width={50} height={50} alt="icon-globe-modal" />
-                <div className="d-flex flex-column ms-3 my-3">
-                    <div className="text-muted text-start">Zwallet System Information</div>
-                    <div className="fw-bold text-start">Perfomance Degraded due Maintenance System</div>
-                </div>
-            </div> */}
             {/* notifikasi transaksi */}
             <div className="text-muted text-start">Notification Transaction</div>
             {shortHistoryData?.data.map((item, index) => (

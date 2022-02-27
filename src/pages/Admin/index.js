@@ -1,25 +1,40 @@
 import React, { Fragment, useState } from 'react'
 
 import Button from '../../components/base/Button';
+import socket from '../../helpers/socket';
 
 const Admin = () => {
-    const [formAdmin, setFormAdmin] = useState({
+    const [formLoginAdmin, setFormLoginAdmin] = useState({
         isLogin: false,
         username: '',
         password: ''
     })
+    const [formInfo, setFormInfo] = useState({
+        picture: require("../../assets/img/icons/globe-admin-modal.png"),
+        admin: 'Zwallet System Information',
+        info: ''
+    })
+    const handleChange = (e) => {
+        setFormInfo({
+            ...formInfo,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const handleLogin = (e) => {
         e.preventDefault()
-        setFormAdmin({
-            ...formAdmin,
+        setFormLoginAdmin({
+            ...formLoginAdmin,
             isLogin: true
         })
     }
-    console.log(formAdmin.isLogin)
+    
+    const handleClick = () => {
+        socket.emit('sendInfo', formInfo)
+    }
     return (
         <Fragment>
-            {!formAdmin.isLogin ? (
+            {!formLoginAdmin.isLogin ? (
                 <>
                     <div className="text-center fw-bold my-5">
                         Zwallet System Administrator
@@ -32,7 +47,7 @@ const Admin = () => {
                             className="mt-3 w-50 py-2"
                             type="text"
                             name="email"
-                            onChange={(e) => setFormAdmin({ ...formAdmin, username: e.target.value })}
+                            onChange={(e) => setFormLoginAdmin({ ...formLoginAdmin, username: e.target.value })}
                             value={undefined}
                             placeholder="Email"
                         />
@@ -40,11 +55,11 @@ const Admin = () => {
                             className="mt-3 w-50 py-2"
                             type="password"
                             name="password"
-                            onChange={(e) => setFormAdmin({ ...formAdmin, username: e.target.value })}
+                            onChange={(e) => setFormLoginAdmin({ ...formLoginAdmin, username: e.target.value })}
                             value={undefined}
                             placeholder="Password"
                         />
-                        <Button isLoading={undefined} onClick={(e) => { handleLogin(e) }} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-50 rounded-3 mt-5 fw-bold">Login</Button>
+                        <Button isLoading={undefined} onClick={handleLogin} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-50 rounded-3 mt-5 fw-bold">Login</Button>
                     </div>
                 </>
             ) : (
@@ -57,11 +72,11 @@ const Admin = () => {
                             className="mt-3 w-50 py-2"
                             type="text"
                             name="message"
-                            onChange={(e) => setFormAdmin({ ...formAdmin, username: e.target.value })}
-                            value={undefined}
+                            onChange={handleChange}
+                            value={formInfo.message}
                             placeholder="message"
                         />
-                        <Button isLoading={undefined} onClick={(e) => { handleLogin(e) }} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-50 rounded-3 mt-5 fw-bold">Submit</Button>
+                        <Button isLoading={undefined} onClick={handleClick} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-50 rounded-3 mt-5 fw-bold">Submit</Button>
                     </div>
                 </div>
             )}

@@ -68,7 +68,7 @@ const TransferInput = () => {
       <article className="bg-white rounded g-0 p-4">
         <div className="g-0 ps-3 fw-bold">Transfer Money</div>
         <div className="rounded py-3 bg-light row my-3">
-          <div className="col flex-grow-0 px-3"><img src={receiverData.data?.picture} width={60} height={60} alt="" /></div>
+          <div className="col flex-grow-0 px-3"><img src={receiverData.data?.picture} width={60} height={60} alt="pic-detail-user" /></div>
           <div className="col my-3">
             <div className="fw-bold">{receiverData.data?.username}</div>
             <div className="text-muted">{receiverData.data?.email}</div>
@@ -88,7 +88,7 @@ const TransferInput = () => {
           </div>
           <div className="text-center fw-bold">Rp. {balanceData?.data} Available</div>
           <div className="text-center overflow-hidden my-3 mx-5 p-3">
-            <img className="position-absolute mt-1" src={require("../../../assets/img/icons/form_edit_input_amount_bank.png")} alt="" />
+            <img className="position-absolute mt-1" src={require("../../../assets/img/icons/form_edit_input_amount_bank.png")} alt="icon-pen-form" />
             <input
               onChange={handleChange}
               name="notes"

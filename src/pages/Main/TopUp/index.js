@@ -1,69 +1,10 @@
 // import internal modules
-import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Fragment} from 'react';
 
 // import external modules
-import { GetUserBalance } from '../../../redux/actions/balance';
-import { GetReceiverDetail } from '../../../redux/actions/receiverDetail';
 
 
 const TopUp = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams();
-
-  const balanceData = useSelector((state) => state.balance);
-  const receiverData = useSelector((state) => state.receiverDetail);
-
-  useEffect(() => {
-    dispatch((GetUserBalance()))
-    dispatch((GetReceiverDetail(id)))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [formInput, setFormInput] = useState({
-    receiver: id,
-    amount: '',
-    date: new Date(),
-    notes: ''
-  })
-  const [formInputError, setFormInputError] = useState({});
-
-  const handleChange = (e) => {
-    setFormInput({
-      ...formInput,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const validateInput = (values) => {
-    const errors = {};
-    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    if (!values.amount) {
-      errors.amount = "Amounts is required";
-    }
-    if (!values.notes) {
-      errors.notes = "Notes is required";
-    }
-    return errors;
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const resultValidate = validateInput(formInput);
-    setFormInputError(resultValidate);
-    handleClick(resultValidate)
-  }
-
-  const handleClick = (resultValidate) => {
-    if (balanceData?.data < formInput.amount) {
-      alert("Insufficient Balance")
-    } else if (Object.keys(resultValidate).length === 0) {
-      localStorage.setItem('tempTransfer', JSON.stringify(formInput))
-      navigate("/main/confirmation");
-    }
-  }
   return (
     <Fragment>
       <article className="bg-white rounded g-0 p-4">

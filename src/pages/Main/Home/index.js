@@ -32,11 +32,11 @@ const Home = () => {
                     phoneUser={phoneData?.data}></BlueBox>
                 <div className="col flex-grow-0 my-3">
                     <Link to={"/main/topup"} style={{ textDecoration: 'none', color: 'black' }}><div className="d-flex px-2 py-2 bg-light bg-gradient rounded my-3">
-                        <img src={require("../../../assets/img/icons/arrowup_blue_homepage.svg").default} alt="" />
+                        <img src={require("../../../assets/img/icons/arrowup_blue_homepage.svg").default} alt="icon-arrowup-topup" />
                         <div>Topup</div>
                     </div></Link>
                     <Link to={"/main/transfer"} style={{ textDecoration: 'none', color: 'black' }}><div className="d-flex px-2 py-2 bg-light bg-gradient rounded my-3">
-                        <img src={require("../../../assets/img/icons/plus_blue_homepage.svg").default} alt="" />
+                        <img src={require("../../../assets/img/icons/plus_blue_homepage.svg").default} alt="icon-plus-transfer" />
                         <div>Transfer</div>
                     </div></Link>
                 </div>
@@ -44,11 +44,11 @@ const Home = () => {
             <main className="row g-0 mt-3">
                 <article className="bg-white rounded col me-1">
                     <div className="row g-0 p-3">
-                        <div className="col d-flex justify-content-start p-1"><img src={require("../../../assets/img/icons/money_in_homepage.svg").default} alt="" /></div>
-                        <div className="col d-flex justify-content-end p-1"><img src={require("../../../assets/img/icons/money_out_homepage.svg").default} alt="" /></div>
+                        <div className="col d-flex justify-content-start p-1"><img src={require("../../../assets/img/icons/money_in_homepage.svg").default} alt="icon-money-in" /></div>
+                        <div className="col d-flex justify-content-end p-1"><img src={require("../../../assets/img/icons/money_out_homepage.svg").default} alt="icon-money-out" /></div>
                     </div>
                     <div className="row g-0">
-                        <div className="col d-flex justify-content-center"><img src={require("../../../assets/img/icons/graph_homepage.png")} alt="" /></div>
+                        <div className="col d-flex justify-content-center"><img src={require("../../../assets/img/icons/graph_homepage.png")} alt="icon-graph" /></div>
                     </div>
                 </article>
                 <article className="bg-white rounded col ms-1">

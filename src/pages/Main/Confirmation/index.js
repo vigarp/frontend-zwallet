@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PostTransfer } from '../../../redux/actions/transfer';
 import { GetTransferDetail } from '../../../redux/actions/transferDetail';
 import { GetUserBalance } from '../../../redux/actions/balance';
-import socket from '../../../helpers/socket';
 
 const Confirmation = () => {
     const dispatch = useDispatch();
@@ -16,9 +15,9 @@ const Confirmation = () => {
     const balanceData = useSelector((state) => state.balance);
     // eslint-disable-next-line no-unused-vars
     const [formInput, setFormInput] = useState({
-        picture: require("../../../assets/img/icons/globe-admin-modal.png"),
-        admin: 'isadmin',
-        info: 'Zwallet mainetenance on progress'
+        receiver: transferDetail.receiver,
+        amount: transferDetail.amount,
+        info: transferDetail.notes
     })
 
     useEffect(() => {
@@ -28,8 +27,7 @@ const Confirmation = () => {
     }, []);
 
     const handleClick = () => {
-        // dispatch((PostTransfer(formInput)))
-        socket.emit('sendTip', formInput);
+        dispatch((PostTransfer(formInput)))
     }
 
     return (
@@ -37,7 +35,7 @@ const Confirmation = () => {
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transfer To</div>
                 <div className="rounded py-3 bg-light row my-3">
-                    <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="" /></div>
+                    <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="pic-person-data" /></div>
                     <div className="col my-3">
                         <div className="fw-bold">{detailPersonData.data?.username}</div>
                         <div className="text-muted">{detailPersonData.data?.email}</div>
