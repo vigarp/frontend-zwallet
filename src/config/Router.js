@@ -10,6 +10,7 @@ import Page404 from "../pages/404";
 import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp";
+import AddPin from "../pages/Auth/AddPin";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
 
@@ -39,6 +40,7 @@ const Router = () => {
                 <Route path="/auth" element={<Auth />}>
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
+                    <Route path="add-pin" element={<AddPin />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
                     <Route path="reset-password" element={<ResetPassword />} />
                     <Route index element={<Navigate to="/auth/login" />} />

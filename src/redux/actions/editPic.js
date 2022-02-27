@@ -34,6 +34,7 @@ export const editPic = (formDataPic) => {
         })
         .then((res) => {
             const resultEditPic = res.data?.message
+            alert(resultEditPic)
             dispatch(editPicResponse(resultEditPic))
         })
         .catch((err) => {

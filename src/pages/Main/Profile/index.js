@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
 import { GetContacts } from '../../../redux/actions/contacts';
-import { editPic } from '../../../redux/actions/editPic';
-import './profile.css'
+import ModalPic from '../../../components/module/ModalPic';
+import './profile.css';
 
 const Profile = () => {
   localStorage.removeItem('tempTransfer');
@@ -15,6 +15,11 @@ const Profile = () => {
 
   const userDetailData = useSelector((state) => state.user);
   const contactsData = useSelector((state) => state.contacts);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = (param) => {
+    setShowModal(param)
+  }
 
   useEffect(() => {
     dispatch((GetUserDetail()))
@@ -22,19 +27,6 @@ const Profile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [formDataPicTemp, setFormDataPicTemp] = useState({
-    picture: ""
-  })
-  const formDataPic = new FormData()
-  formDataPic.append("picture", formDataPicTemp.picture[0])
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch((editPic(formDataPic)))
-      .then(() => {
-        dispatch((GetUserDetail()))
-      })
-  }
   const handleLogout = () => {
     localStorage.removeItem('token')
     window.location.reload('/auth/login')
@@ -46,11 +38,7 @@ const Profile = () => {
           <img className="rounded" src={userDetailData.data?.picture} height={80} width={80} alt="pic-detail-user" />
           <div className="d-flex mt-3 user-pointer">
             <img className="ms-1" src={require("../../../assets/img/icons/edit-edit-profile-page.svg").default} alt="icon-edit-profile" />
-            <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
-              <input type="file" onChange={(e) => setFormDataPicTemp({ ...formDataPicTemp, picture: e.currentTarget.files })} /><br />
-              <button type="submit">upload</button>
-            </form>
-            {/* <div className="text-muted ms-3 mt-1">Edit</div> */}
+            <div onClick={()=>openModal(true)} className="text-muted ms-3 mt-1">Edit</div>
           </div>
         </div>
         <div className="lower mt-3">
@@ -99,6 +87,7 @@ const Profile = () => {
           ))}
         </article>
       </main>
+      {showModal === true ? <ModalPic openModal={openModal} /> : '' }
     </Fragment>
   )
 }
