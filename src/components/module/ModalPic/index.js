@@ -22,11 +22,7 @@ const ModalPic = ({ openModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
-    dispatch((editPic(formDataPic, setLoading)))
-      .then(() => {
-        dispatch((GetUserDetail()))
-        openModal(false)
-      })
+    dispatch((editPic(formDataPic, setLoading, openModal)))
   }
   return (
     <div className="modal-wrapper">

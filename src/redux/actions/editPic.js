@@ -1,6 +1,7 @@
 // import internal modules
 import axios from "axios";
 import { decodeToken } from "react-jwt";
+import { GetUserDetail } from "./user";
 
 const tokenUser = localStorage.getItem('token');
 const userInfo = decodeToken(tokenUser);
@@ -23,7 +24,7 @@ export const editPicError = (error) => {
     }
 }
 
-export const editPic = (formDataPic, setLoading) => {
+export const editPic = (formDataPic, setLoading, openModal) => {
     return (dispatch) => {
         dispatch(editPicRequest())
         return axios({
@@ -35,13 +36,16 @@ export const editPic = (formDataPic, setLoading) => {
         .then((res) => {
             setLoading(false)
             const resultEditPic = res.data?.message
-            alert(resultEditPic)
             dispatch(editPicResponse(resultEditPic))
+            alert(resultEditPic)
+            openModal(false)
+            dispatch((GetUserDetail()))
         })
         .catch((err) => {
             setLoading(false)
-            const message = err.message
+            const message = err.response.data.message
             dispatch(editPicError(message))
+            alert(message)
         })
     }
 }
