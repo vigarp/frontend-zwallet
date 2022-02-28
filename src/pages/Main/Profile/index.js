@@ -76,7 +76,7 @@ const Profile = () => {
               <div className="text-decoration-none"><Link to={"/main/transfer"} style={{ textDecoration: 'none' }}>See All</Link></div>
             </div>
           </div>
-          {contactsData?.data.map((item, index) => (
+          {contactsData.data.data?.map((item, index) => (
           <div className="row g-0 me-3 my-4 user-pointer" key={index} onClick={() => navigate(`/main/transfer/${item.id}`)}>
             <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt="pic-detail-user" /></div>
             <div className="col lh-lg">

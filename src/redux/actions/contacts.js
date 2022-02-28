@@ -23,7 +23,7 @@ export const GetContactsError = (error)=> {
 }
 
 
-export const GetContacts = (querySearch)=> {
+export const GetContacts = (querySearch, queryPage)=> {
     return (dispatch) => {
         dispatch(GetContactsRequest())
         if(querySearch) {
@@ -33,7 +33,7 @@ export const GetContacts = (querySearch)=> {
                 headers: {Authorization: 'Bearer ' + tokenUser}
             })
             .then((res)=> {
-               const dataContacts =  res.data?.data
+               const dataContacts =  res?.data
                dispatch(GetContactsResponse(dataContacts))
             })
             .catch((err)=>{
@@ -43,11 +43,11 @@ export const GetContacts = (querySearch)=> {
         } else {
             return axios({
                 method: 'GET',
-                url: `${process.env.REACT_APP_URL_BACKEND}/users`,
+                url: `${process.env.REACT_APP_URL_BACKEND}/users?page=${queryPage}`,
                 headers: {Authorization: 'Bearer ' + tokenUser}
             })
             .then((res) => {
-                const dataContacts = res.data?.data
+                const dataContacts = res?.data
                 dispatch(GetContactsResponse(dataContacts))
             })
             .catch((err) => {
