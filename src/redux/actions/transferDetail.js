@@ -26,7 +26,7 @@ export const GetTransferDetail = (transferData) => {
         dispatch(GetTransferDetailRequest())
         return axios({
             method: 'GET',
-            url: `${process.env.REACT_APP_URL_BACKEND}/users/${transferData.receiver}`,
+            url: `${process.env.REACT_APP_URL_BACKEND}/users/${transferData.idReceiver}`,
             headers: {Authorization: 'Bearer ' + tokenUser}
         })
         .then((res) => {

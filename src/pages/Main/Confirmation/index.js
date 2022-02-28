@@ -18,7 +18,9 @@ const Confirmation = () => {
     const balanceData = useSelector((state) => state.balance);
     // eslint-disable-next-line no-unused-vars
     const [formInput, setFormInput] = useState({
-        receiver: transferDetail.receiver,
+        idSender: transferDetail.idSender,
+        sender: transferDetail.sender,
+        receiver: transferDetail.idReceiver,
         amount: transferDetail.amount,
         info: transferDetail.notes
     })
@@ -31,8 +33,8 @@ const Confirmation = () => {
 
     const handleClick = () => {
         dispatch((PostTransfer(formInput, navigate)))
+        socket.emit('sendTransaction', formInput)
     }
-
     return (
         <Fragment>
             <article className="bg-white rounded g-0 p-4">

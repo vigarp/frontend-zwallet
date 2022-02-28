@@ -2,6 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { decodeToken } from 'react-jwt';
 
 // import external modules
 import { GetUserBalance } from '../../../redux/actions/balance';
@@ -13,6 +14,9 @@ const TransferInput = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const tokenUser = localStorage.getItem("token");
+  const userInfo = decodeToken(tokenUser);
+
   const balanceData = useSelector((state) => state.balance);
   const receiverData = useSelector((state) => state.receiverDetail);
 
@@ -23,7 +27,9 @@ const TransferInput = () => {
   }, []);
 
   const [formInput, setFormInput] = useState({
-    receiver: id,
+    idSender: userInfo.id,
+    sender: userInfo.username,
+    idReceiver: id,
     amount: '',
     date: new Date(),
     notes: ''
