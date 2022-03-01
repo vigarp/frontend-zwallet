@@ -20,10 +20,10 @@ const History = () => {
     else return 'green'
   }
   const topUpPic = (type_detail) => {
-    if (type_detail === "Topup") return require('../../../assets/img/pictures/topup-icons.png')
+    if (type_detail === "Topup") return require("../../../assets/img/icons/wallet-topup-homepage.svg").default
 }
 const topUpName = (type_detail) => {
-    if (type_detail === "Topup") return 'topup ewallet'
+    if (type_detail === "Topup") return ''
 }
   return (
     <Fragment>

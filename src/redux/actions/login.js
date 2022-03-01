@@ -40,13 +40,12 @@ export const LoginUser = (loginData, setLoading) => {
             })
             .catch((err) => {
                 setLoading(false)
-                const message = err.message
-                dispatch(LoginUserError(message))
-                // if (err.response.status === 403) {
-                //     alert(err.response.data.message)
-                // } else {
-                //     alert('Internal Server Error')
-                // }
+                if (err.response !== undefined) {
+                    const message = err.response.data.message
+                    dispatch(LoginUserError(message))
+                } else {
+                    dispatch(LoginUserError("Network Error"))
+                }
             })
     }
 }

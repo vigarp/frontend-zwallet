@@ -7,10 +7,10 @@ const HistoryBox = ({picture, amount, username, type}) => {
         else return 'green'
     }
     const topUpPic = (type) => {
-        if (type === "Topup") return require('../../../assets/img/pictures/topup-icons.png')
+        if (type === "Topup") return require("../../../assets/img/icons/wallet-topup-homepage.svg").default
     }
     const topUpName = (type) => {
-        if (type === "Topup") return 'topup ewallet'
+        if (type === "Topup") return ''
     }
     return (
         <div className="row g-0 me-3 my-4">
