@@ -10,7 +10,6 @@ import Page404 from "../pages/404";
 import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp";
-import AddPin from "../pages/Auth/AddPin";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
 
