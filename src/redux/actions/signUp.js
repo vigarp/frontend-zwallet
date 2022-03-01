@@ -19,7 +19,7 @@ export const SignUpUserError = (error) => {
     }
 }
 
-export const SignUpUser = (signupData) => {
+export const SignUpUser = (signupData, setLoading, navigate) => {
     return (dispatch) => {
         dispatch(SignUpUserRequest())
         return axios({
@@ -31,20 +31,21 @@ export const SignUpUser = (signupData) => {
                 password: signupData.password
             }
         })
-        .then((res) => {
-            const resultSignUp = res.data?.message
-            dispatch(SignUpUserResponse(resultSignUp))
-            alert(resultSignUp)
-            window.location.replace("/auth/login")
-        })
-        .catch((err) => {
-            const message = err.message
-            dispatch(SignUpUserError(message))
-            if (err.response.status === 403) {
-                alert(err.response.data.message)
-            } else {
-                alert('Internal Server Error')
-            }
-        })
+            .then((res) => {
+                setLoading(false)
+                const resultSignUp = res.data?.message
+                dispatch(SignUpUserResponse(resultSignUp))
+                navigate("/auth/create-pin")
+            })
+            .catch((err) => {
+                setLoading(false)
+                console.log(err)
+                if (err.response !== undefined) {
+                    const message = err.response.data.message
+                    dispatch(SignUpUserError(message))
+                } else {
+                    dispatch(SignUpUserError("Network Error"))
+                }
+            })
     }
 }

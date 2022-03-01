@@ -1,26 +1,41 @@
 // import internal modules
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 // import external modules
 import { SignUpUser } from '../../../redux/actions/signUp';
 import Input from '../../../components/base/Input';
+import Button from '../../../components/base/Button';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const signUpData = useSelector((state => state.signUp))
 
   const [formSignUp, setFormSignUp] = useState({
     username: '',
     email: '',
     password: ''
   })
-  const [formSignUpError, setFormSignUpError] = useState({});
+  const [formSignUpError, setFormSignUpError] = useState(false);
+  const [passHidden, setPassHidden] = useState(true);
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormSignUp({
       ...formSignUp,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleHiddenPass = () => {
+    if (passHidden === true) {
+      setPassHidden(false)
+    } else {
+      setPassHidden(true)
+    }
   }
 
   const validateSignUp = (values) => {
@@ -50,9 +65,12 @@ const SignUp = () => {
   }
   const handleClick = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
-      dispatch((SignUpUser(formSignUp)))
+      setFormSignUpError(false)
+      setLoading(true)
+      dispatch((SignUpUser(formSignUp, setLoading, navigate)))
     }
   }
+  console.log(signUpData, 'isi signupdata')
   return (
     <div className="my-5 mx-5">
       <h1 className="text-black text-bold fs-5 text-start my-5 fs-3 fw-bold">Start Accessing Banking Needs<br />
@@ -68,7 +86,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={formSignUp.username}
           className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
-        <div className="position-absolute text-danger handle-error">{formSignUpError.username}</div>
+        <div className="position-absolute text-error handle-error">{formSignUpError.username}</div>
         <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/mail_loginpage.svg").default} alt="icon-mail-loginpage" /></div>
         <Input
           type="email"
@@ -77,7 +95,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={formSignUp.email}
           className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
-        <div className="position-absolute text-danger handle-error">{formSignUpError.email}</div>
+        <div className="position-absolute text-error handle-error">{formSignUpError.email}</div>
         <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/lock_loginpage.svg").default} alt="icon-lock-loginpage" /></div>
         <Input
           type="password"
@@ -86,9 +104,10 @@ const SignUp = () => {
           onChange={handleChange}
           value={formSignUp.password}
           className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
-        <div className="position-absolute text-danger handle-error">{formSignUpError.password}</div>
-        <button onClick={handleSubmit} className="py-3 px-5 bg-secondary bg-opacity-50 text-white w-100 rounded-3 mt-3 fw-bold">Sign Up</button>
-        <div className="text-center mt-3">Already have an account? Let's <Link to={"/auth/login"} style={{ textDecoration: 'none' }}>Login</Link></div>
+        <div className="position-absolute text-error handle-error">{formSignUpError.password}</div>
+        <div className="text-center my-3 text-error">{signUpData.error}</div>
+        <Button isLoading={loading} onClick={handleSubmit} className="btn-login py-3 px-5 bg-secondary bg-opacity-25 text-secondary w-100 mt-5 fw-bold">Sign Up</Button>
+        <div className="text-center mt-3">Already have an account? Let's <Link to={"/auth/login"} style={{ textDecoration: 'none', fontWeight: 'bold' }}>Login</Link></div>
       </div>
     </div>
   )
