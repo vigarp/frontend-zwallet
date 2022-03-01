@@ -42,11 +42,11 @@ export const LoginUser = (loginData, setLoading) => {
                 setLoading(false)
                 const message = err.message
                 dispatch(LoginUserError(message))
-                if (err.response.status === 403) {
-                    alert(err.response.data.message)
-                } else {
-                    alert('Internal Server Error')
-                }
+                // if (err.response.status === 403) {
+                //     alert(err.response.data.message)
+                // } else {
+                //     alert('Internal Server Error')
+                // }
             })
     }
 }

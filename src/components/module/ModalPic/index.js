@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 // import external modules
 import { editPic } from '../../../redux/actions/editPic';
-import { GetUserDetail } from '../../../redux/actions/user';
 import Button from '../../../components/base/Button';
 import './modalpic.css'
 

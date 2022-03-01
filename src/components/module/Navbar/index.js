@@ -44,7 +44,6 @@ const Navbar = () => {
             setShowModal(false)
         }
     }
-    console.log(transferInfo)
     return (
         <Fragment>
             <nav className="h-20 bg-white rounded-bottom">
