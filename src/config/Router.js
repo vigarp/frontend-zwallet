@@ -29,6 +29,8 @@ import ManagePhoneNumber from "../pages/Main/ManagePhoneNumber";
 import EditPhoneNumber from "../pages/Main/EditPhoneNumber";
 import ChangePassword from "../pages/Main/ChangePassword";
 import ChangePin from "../pages/Main/ChangePin";
+import CreatePin from "../pages/Auth/CreatePin";
+import PinSuccess from "../pages/Auth/PinSuccess";
 
 const Router = () => {
     return (
@@ -40,7 +42,8 @@ const Router = () => {
                 <Route path="/auth" element={<Auth />}>
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
-                    <Route path="add-pin" element={<AddPin />} />
+                    <Route path="create-pin" element={<CreatePin />} />
+                    <Route path="pin-success" element={<PinSuccess />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
                     <Route path="reset-password" element={<ResetPassword />} />
                     <Route index element={<Navigate to="/auth/login" />} />

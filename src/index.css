@@ -49,6 +49,14 @@
   border-bottom:1px solid #ff0000 !important;
 }
 
+/* Create PIN page */
+.otp-field {
+  width: 53px;
+  height: 65px;
+  border-radius: 10px;
+  margin-right: 50px;
+  padding-left: 12px;
+}
 
 body {
   margin: 0;
