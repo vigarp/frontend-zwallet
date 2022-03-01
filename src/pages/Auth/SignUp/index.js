@@ -97,13 +97,29 @@ const SignUp = () => {
           className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
         <div className="position-absolute text-error handle-error">{formSignUpError.email}</div>
         <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/lock_loginpage.svg").default} alt="icon-lock-loginpage" /></div>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          onChange={handleChange}
-          value={formSignUp.password}
-          className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
+        {passHidden === true ? (
+          <>
+            <Input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              onChange={handleChange}
+              value={formSignUp.password}
+              className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
+            <img onClick={() => handleHiddenPass()} className="position-relative float-end icon-eyecrossed" src={require("../../../assets/img/icons/eye-crossed_loginpage.svg").default} alt="icon-eyecrossed-loginpage" />
+          </>
+        ) : (
+          <>
+            <Input
+              type="text"
+              name="password"
+              placeholder="Enter your password"
+              onChange={handleChange}
+              value={formSignUp.password}
+              className="py-3 px-5 row border-1 my-5 bg-transparent border-0 border-bottom w-100" />
+            <img onClick={() => handleHiddenPass()} className="position-relative float-end icon-eyecrossed" src={require("../../../assets/img/icons/eye_loginpage.svg").default} alt="icon-eyecrossed-loginpage" />
+          </>
+        )}
         <div className="position-absolute text-error handle-error">{formSignUpError.password}</div>
         <div className="text-center my-3 text-error">{signUpData.error}</div>
         <Button isLoading={loading} onClick={handleSubmit} className="btn-login py-3 px-5 bg-secondary bg-opacity-25 text-secondary w-100 mt-5 fw-bold">Sign Up</Button>
