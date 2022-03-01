@@ -1,11 +1,14 @@
 // import internal modules
 import React, {Fragment, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
+import { deletePhone } from '../../../redux/actions/deletePhone';
 
 const ManagePhoneNumber = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userDetailData = useSelector((state) => state.user);
 
@@ -13,6 +16,13 @@ const ManagePhoneNumber = () => {
     dispatch((GetUserDetail()))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleClick = () => {
+    dispatch((deletePhone()))
+    .then(() => {
+      dispatch((GetUserDetail()))
+    })
+  }
 
   return (
     <Fragment>
@@ -24,9 +34,14 @@ const ManagePhoneNumber = () => {
         <div className="rounded p-3 d-flex g-0 me-3 my-4">
           <div className="lh-lg ps-3 flex-grow-1">
             <div className="text-muted">Primary</div>
-            <div className="fw-bold">{userDetailData.data?.phone}</div>
+            {userDetailData.data.phone ? (
+              <div className="fw-bold">{userDetailData.data?.phone}</div>
+            ) : (
+              <div className="user-pointer" onClick={() => navigate("/main/edit-phone-number")}>Add Phone Number</div>
+            )}
+            
           </div>
-          <img src={require("../../../assets/img/icons/trash_managephonenumberpage.svg").default} alt="icon-trash-managephonenumberpage" />
+          <div onClick={handleClick} className="user-pointer"><img src={require("../../../assets/img/icons/trash_managephonenumberpage.svg").default} alt="icon-trash-managephonenumberpage" /></div>
         </div>
       </article>
     </Fragment>

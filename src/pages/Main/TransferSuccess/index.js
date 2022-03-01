@@ -29,7 +29,7 @@ const TransferSuccess = () => {
     <Fragment>
       <article className="bg-white rounded g-0 p-4">
         <div className="w-100 text-center mx-3">
-          <div className="text-center g-0 ps-3 my-3"><img src={require("../../../assets/img/icons/checklist_transfer_success.svg").default} alt="" /></div>
+          <div className="text-center g-0 ps-3 my-3"><img src={require("../../../assets/img/icons/checklist_transfer_success.svg").default} alt="icon-transfer-success" /></div>
           <div className="text-center g-0 ps-3 my-3 fw-bold">Transfer Success</div>
         </div>
         <div className="rounded p-3 row g-0 me-3 my-4">
@@ -58,15 +58,15 @@ const TransferSuccess = () => {
         </div>
         <div className="fw-bold g-0 ps-3">Transfer to</div>
         <div className="rounded py-3 bg-light row my-3">
-          <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="" /></div>
+          <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="pic-detail-user" /></div>
           <div className="col my-3">
             <div className="fw-bold">{detailPersonData.data?.username}</div>
             <div className="text-muted">{detailPersonData.data?.email}</div>
           </div>
         </div>
         <div className="d-flex justify-content-end">
-          <div className="bg-light rounded px-3 py-3 m-1 align-self-center"><img src={require("../../../assets/img/icons/button_share_transfer_success.svg").default} alt="" /></div>
-          <button className="bg-light rounded px-3 py-3 mx-3 align-self-center"><img src={require("../../../assets/img/icons/button_download_transfer_success.svg").default} alt="" />Download</button>
+          <div className="bg-light rounded px-3 py-3 m-1 align-self-center"><img src={require("../../../assets/img/icons/button_share_transfer_success.svg").default} alt="icon-button-share" /></div>
+          <button className="bg-light rounded px-3 py-3 mx-3 align-self-center"><img src={require("../../../assets/img/icons/button_download_transfer_success.svg").default} alt="icon-button-download" />Download</button>
           <button onClick={handleClick} className="bg-primary bg-gradient w-25 rounded p-3 text-center">Back to Home</button>
         </div>
       </article>

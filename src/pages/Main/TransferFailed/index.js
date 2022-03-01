@@ -22,14 +22,13 @@ const TransferFailed = () => {
   }, []);
 
   const handleClick = () => {
-    localStorage.removeItem('tempTransfer');
-    navigate('/main/home')
+    navigate(-1)
   }
   return (
     <Fragment>
       <article className="bg-white rounded g-0 p-4">
         <div className="w-100 text-center mx-3">
-          <div className="text-center g-0 ps-3 my-3"><img src={require("../../../assets/img/icons/cross_failed_transfer_failed.svg").default} alt="" /></div>
+          <div className="text-center g-0 ps-3 my-3"><img src={require("../../../assets/img/icons/cross_failed_transfer_failed.svg").default} alt="icon-cross-failed" /></div>
           <div className="text-center g-0 ps-3 my-3 fw-bold">Transfer Failed</div>
           <div className="text-muted">We can't transfer your money at the moment, we recommend you to check your<br/>internet connection and try again.</div>
         </div>
@@ -59,16 +58,14 @@ const TransferFailed = () => {
         </div>
         <div className="fw-bold g-0 ps-3">Transfer to</div>
         <div className="rounded py-3 bg-light row my-3">
-          <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="" /></div>
+          <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="pic-detail-user" /></div>
           <div className="col my-3">
             <div className="fw-bold">{detailPersonData.data?.username}</div>
             <div className="text-muted">{detailPersonData.data?.email}</div>
           </div>
         </div>
         <div className="d-flex justify-content-end">
-          <div className="bg-light rounded px-3 py-3 m-1 align-self-center"><img src={require("../../../assets/img/icons/button_share_transfer_success.svg").default} alt="" /></div>
-          <button className="bg-light rounded px-3 py-3 mx-3 align-self-center"><img src={require("../../../assets/img/icons/button_download_transfer_success.svg").default} alt="" />Download</button>
-          <button onClick={handleClick} className="bg-primary bg-gradient w-25 rounded p-3 text-center">Back to Home</button>
+          <button onClick={handleClick} className="bg-primary bg-gradient w-25 rounded p-3 text-center">Try Again</button>
         </div>
       </article>
     </Fragment>

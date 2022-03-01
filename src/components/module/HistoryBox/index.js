@@ -14,7 +14,7 @@ const HistoryBox = ({picture, amount, username, type}) => {
     }
     return (
         <div className="row g-0 me-3 my-4">
-            <div className="col flex-grow-0 px-3"><img className="rounded" src={topUpPic(type) ? topUpPic(type) : picture} width={60} height={60} alt="" /></div>
+            <div className="col flex-grow-0 px-3"><img className="rounded" src={topUpPic(type) ? topUpPic(type) : picture} width={60} height={60} alt="icon-topup-type" /></div>
             <div className="col lh-lg">
                 <div className="fw-bold">{topUpName(type) ? topUpName(type) : username}</div>
                 <div className="text-muted">{type}</div>

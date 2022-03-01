@@ -1,41 +1,46 @@
 // import internal modules
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import external modules
 import { PostTransfer } from '../../../redux/actions/transfer';
 import { GetTransferDetail } from '../../../redux/actions/transferDetail';
 import { GetUserBalance } from '../../../redux/actions/balance';
+import socket from '../../../helpers/socket';
 
 const Confirmation = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
-  const detailPersonData = useSelector((state) => state.transferDetail);
-  const balanceData = useSelector((state) => state.balance);
-  // eslint-disable-next-line no-unused-vars
-  const [formInput, setFormInput] = useState({
-    receiver: transferDetail.receiver,
-    amount: transferDetail.amount,
-    notes: transferDetail.notes
-  })
-  
-  useEffect(() => {
-    dispatch((GetTransferDetail(transferDetail)))
-    dispatch((GetUserBalance()))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const transferDetail = JSON.parse(localStorage.getItem('tempTransfer'));
+    const detailPersonData = useSelector((state) => state.transferDetail);
+    const balanceData = useSelector((state) => state.balance);
+    // eslint-disable-next-line no-unused-vars
+    const [formInput, setFormInput] = useState({
+        idSender: transferDetail.idSender,
+        sender: transferDetail.sender,
+        receiver: transferDetail.idReceiver,
+        amount: transferDetail.amount,
+        info: transferDetail.notes
+    })
 
-  const handleClick = () => {
-    dispatch((PostTransfer(formInput)))
-  }
+    useEffect(() => {
+        dispatch((GetTransferDetail(transferDetail)))
+        dispatch((GetUserBalance()))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  return (
-    <Fragment>
+    const handleClick = () => {
+        dispatch((PostTransfer(formInput, navigate)))
+        socket.emit('sendTransaction', formInput)
+    }
+    return (
+        <Fragment>
             <article className="bg-white rounded g-0 p-4">
                 <div className="g-0 ps-3 fw-bold">Transfer To</div>
                 <div className="rounded py-3 bg-light row my-3">
-                    <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="" /></div>
+                    <div className="col flex-grow-0 px-3"><img src={detailPersonData.data?.picture} width={60} height={60} alt="pic-person-data" /></div>
                     <div className="col my-3">
                         <div className="fw-bold">{detailPersonData.data?.username}</div>
                         <div className="text-muted">{detailPersonData.data?.email}</div>
@@ -71,7 +76,7 @@ const Confirmation = () => {
                 </div>
             </article>
         </Fragment>
-  )
+    )
 }
 
 export default Confirmation

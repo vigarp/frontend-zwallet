@@ -4,11 +4,13 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 // import external modules
 import LandingPage from "../pages";
+import Admin from "../pages/Admin/"
 import Page404 from "../pages/404";
 
 import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp";
+import AddPin from "../pages/Auth/AddPin";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
 
@@ -24,7 +26,7 @@ import TopUp from "../pages/Main/TopUp";
 import Profile from "../pages/Main/Profile";
 import PersonalInformation from "../pages/Main/PersonalInformation";
 import ManagePhoneNumber from "../pages/Main/ManagePhoneNumber";
-import AddPhoneNumber from "../pages/Main/AddPhoneNumber";
+import EditPhoneNumber from "../pages/Main/EditPhoneNumber";
 import ChangePassword from "../pages/Main/ChangePassword";
 import ChangePin from "../pages/Main/ChangePin";
 
@@ -33,9 +35,12 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/admin" element={<Admin />} />
+
                 <Route path="/auth" element={<Auth />}>
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
+                    <Route path="add-pin" element={<AddPin />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
                     <Route path="reset-password" element={<ResetPassword />} />
                     <Route index element={<Navigate to="/auth/login" />} />
@@ -53,7 +58,7 @@ const Router = () => {
                     <Route path="profile" element={<Profile />} />
                     <Route path="personal-information" element={<PersonalInformation />} />
                     <Route path="manage-phone-number" element={<ManagePhoneNumber />} />
-                    <Route path="add-phone-number" element={<AddPhoneNumber />} />
+                    <Route path="edit-phone-number" element={<EditPhoneNumber />} />
                     <Route path="change-password" element={<ChangePassword />} />
                     <Route path="change-pin" element={<ChangePin />} />
                     <Route index element={<Navigate to="/main/home" />} />

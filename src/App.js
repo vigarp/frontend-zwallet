@@ -1,5 +1,6 @@
 // import internal modules
-import React, {useEffect} from "react";
+import React from "react";
+
 // import external modules
 import Router from './config/Router'
 
