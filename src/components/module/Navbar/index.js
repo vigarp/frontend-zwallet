@@ -46,7 +46,7 @@ const Navbar = () => {
     }
     return (
         <Fragment>
-            <nav className="h-20 bg-white rounded-bottom">
+            <nav className="h-20 mb-5 bg-white navbar">
                 <div className="container d-flex justify-content-between p-3">
                     <div className="text-primary fw-bold fs-3"><Link to={"/main"} style={{ textDecoration: 'none' }}>Zwallet</Link></div>
                     <div className="d-flex">

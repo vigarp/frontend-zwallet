@@ -1,18 +1,18 @@
 // import internal modules
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // import external modules
 import './sidebar.css';
 
 const Sidebar = () => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate();
     const handleLogout = () => {
-        localStorage.removeItem('token')
-        window.location.reload('/auth/login')
+        localStorage.clear()
+        navigate("/auth/login")
     }
     return (
-        <aside className="bg-white rounded w-25 d-flex flex-column justify-content-between p-3 me-3">
+        <aside className="sidebar w-25 bg-white d-flex flex-column justify-content-between p-3 me-3">
             <div className="sidebar-upper">
                 <div className="row p-3">
                     <div className="col flex-grow-0 py-1"><img src={require("../../../assets/img/icons/grid_homepage_plain.svg").default} alt="icon-grid-homepage-active" /></div>

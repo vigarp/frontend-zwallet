@@ -1,5 +1,5 @@
 // import internal modules
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 // import external modules
@@ -18,16 +18,16 @@ const Main = () => {
   }
 
   return (
-    <div className="min-vh-100 bg-light">
+    <Fragment>
       <Navbar />
-      <div className="d-flex px-5 my-5 min-vh-100">
+      <div className="container d-flex min-vh-100">
         <Sidebar />
-        <div className="bg-transparent border-rounded w-100 ms-5">
+        <section className="flex-fill">
           <Outlet />
-        </div>
+        </section>
       </div>
       <Footer />
-    </div>
+    </Fragment> 
   )
 }
 

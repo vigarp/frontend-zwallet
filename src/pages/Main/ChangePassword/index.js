@@ -9,7 +9,7 @@ import Button from '../../../components/base/Button';
 import { editPassword } from '../../../redux/actions/editPassword';
 import './changepassword.css';
 
-const PersonalInformation = () => {
+const ChangePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -107,4 +107,4 @@ const PersonalInformation = () => {
   )
 }
 
-export default PersonalInformation
+export default ChangePassword
