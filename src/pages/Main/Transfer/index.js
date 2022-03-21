@@ -31,9 +31,8 @@ const Transfer = () => {
     for (let i = 1; i <= contactsData.data.message?.totalPage; i++) {
         pages.push(i)
     }
-
+    
     const contactsFiltered = contactsData.data.data?.filter(identity => identity.id !== userInfo.id)
-    console.log(contactsFiltered)
 
     return (
         <Fragment>

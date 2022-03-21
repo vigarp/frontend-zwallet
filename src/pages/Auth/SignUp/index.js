@@ -70,7 +70,7 @@ const SignUp = () => {
       dispatch((SignUpUser(formSignUp, setLoading, navigate)))
     }
   }
-  console.log(signUpData, 'isi signupdata')
+  
   return (
     <div className="my-5 mx-5">
       <h1 className="text-black text-bold fs-5 text-start my-5 fs-3 fw-bold">Start Accessing Banking Needs<br />
