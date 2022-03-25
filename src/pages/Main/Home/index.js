@@ -1,7 +1,7 @@
 // import internal modules
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import external modules
 import BlueBox from '../../../components/module/BlueBox';
@@ -9,6 +9,7 @@ import HistoryBox from '../../../components/module/HistoryBox';
 import { GetUserBalance } from '../../../redux/actions/balance';
 import { GetUserPhone } from '../../../redux/actions/phone';
 import { GetShortHistory } from '../../../redux/actions/shortHistory';
+import { PostBalance } from '../../../redux/actions/postBalance';
 
 const Home = () => {
     localStorage.removeItem('tempTransfer');
@@ -22,8 +23,21 @@ const Home = () => {
         dispatch((GetUserBalance()))
         dispatch((GetUserPhone()))
         dispatch((GetShortHistory()))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const handleTopUp = () => {
+        let topUpValue = prompt("Please fill in the balance you want");
+        if (topUpValue === null) {
+            return;
+        } else if (!/^[0-9]+$/.test(topUpValue)) {
+            alert("Please fill with a number.");
+        } else {
+            dispatch((PostBalance(topUpValue)))
+            dispatch((GetUserBalance()))
+            dispatch((GetShortHistory()))
+        }
+    }
     return (
         <Fragment>
             <main className="row g-0 p-4 box-blue">
@@ -31,10 +45,10 @@ const Home = () => {
                     balanceUser={balanceData?.data}
                     phoneUser={phoneData?.data}></BlueBox>
                 <div className="col flex-grow-0 my-3">
-                    <Link to={"/main/topup"} className="d-flex mb-3 text-decoration-none text-black transfer-button">
+                    <div onClick={handleTopUp} className="d-flex mb-3 text-decoration-none text-black transfer-button">
                         <img className="pe-1" src={require("../../../assets/img/icons/arrowup_blue_homepage.svg").default} alt="icon-arrowup-topup" />
                         <div className="fw-bold text-white">Topup</div>
-                    </Link>
+                    </div>
                     <Link to={"/main/transfer"} className="d-flex mt-3 text-decoration-none text-black topup-button">
                         <img className="pe-1" src={require("../../../assets/img/icons/plus_blue_homepage.svg").default} alt="icon-plus-transfer" />
                         <div className="fw-bold text-white">Transfer</div>
@@ -57,7 +71,7 @@ const Home = () => {
                             <div className="fw-bold">Transactions History</div>
                         </div>
                         <div className="col d-flex justify-content-end">
-                        <div className="text-decoration-none"><Link to={"/main/history"} style={{ textDecoration: 'none' }}>See All</Link></div>
+                            <div className="text-decoration-none"><Link to={"/main/history"} style={{ textDecoration: 'none' }}>See All</Link></div>
                         </div>
                     </div>
                     {shortHistoryData?.data.map((item, index) => (

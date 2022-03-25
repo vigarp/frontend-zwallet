@@ -35,7 +35,7 @@ export const SignUpUser = (signupData, setLoading, navigate) => {
                 setLoading(false)
                 const resultSignUp = res.data?.message
                 dispatch(SignUpUserResponse(resultSignUp))
-                navigate("/auth/create-pin")
+                navigate("/auth/login")
             })
             .catch((err) => {
                 setLoading(false)

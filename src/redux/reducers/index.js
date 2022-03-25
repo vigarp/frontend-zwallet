@@ -17,6 +17,7 @@ import signUp from './signUp';
 import editPhone from './editPhone';
 import editPassword from './editPassword';
 import deletePhone from './deletePhone';
+import postBalance from './postBalance'
 
 const rootReducers = combineReducers({
     contacts,
@@ -33,9 +34,8 @@ const rootReducers = combineReducers({
     signUp,
     editPhone,
     editPassword,
-    deletePhone
-
-
+    deletePhone,
+    postBalance
 })
 
 export default rootReducers
