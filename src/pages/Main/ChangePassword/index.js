@@ -72,7 +72,7 @@ const ChangePassword = () => {
           <div className="g-0 ps-3 my-3 fw-bold">Change Password</div>
           <div className="g-0 ps-3 my-3 text-muted">You must enter your current password and then<br />type your new password twice.</div>
         </div>
-        <div className="my-5 form-change-position">
+        <div className="my-5 w-50 form-change-position">
           <div className="position-absolute my-3 mx-1"><img src={require("../../../assets/img/icons/lock_loginpage.svg").default} alt="icon-lock-loginpage" /></div>
           <Input
             type="password"

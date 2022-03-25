@@ -13,11 +13,11 @@ const ModalPic = ({ openModal }) => {
   const [loading, setLoading] = useState(false);
   const [formPictureError, setFormPictureError] = useState(false);
 
-  const [formDataPicTemp, setFormDataPicTemp] = useState({
-    picture: ""
-  })
-  const formDataPic = new FormData()
-  formDataPic.append("picture", formDataPicTemp.picture[0])
+  // const [formDataPicTemp, setFormDataPicTemp] = useState({
+  //   picture: ""
+  // })
+  // const formDataPic = new FormData()
+  // formDataPic.append("picture", formDataPicTemp.picture[0])
 
   const [formPicture, setFormPicture] = useState({
     picture: ''
@@ -63,7 +63,7 @@ const ModalPic = ({ openModal }) => {
         <div>Select File and upload the picture</div>
         <div className="my-3">Change Profile Picture</div>
         <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)} className="d-flex flex-column">
-          <input disabled type="file" onChange={(e) => setFormDataPicTemp({ ...formDataPicTemp, picture: e.currentTarget.files })} /><br />
+          {/* <input disabled type="file" onChange={(e) => setFormDataPicTemp({ ...formDataPicTemp, picture: e.currentTarget.files })} /><br /> */}
           <input 
           type="text"
           name="picture"
