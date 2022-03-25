@@ -17,6 +17,7 @@ const Navbar = () => {
 
     const { userName } = useContext(userContext);
     const { userPicture } = useContext(userContext);
+    const { userPhone } = useContext(userContext);
     const { userEmail } = useContext(userContext);
 
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Navbar = () => {
 
     useEffect(() => {
         socket.emit('user online', userInfo.id)
-        dispatch((GetShortHistory()))        
+        dispatch((GetShortHistory()))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     socket.on('sendInfo', (data) => {
@@ -53,7 +54,7 @@ const Navbar = () => {
                         <img className="user-pointer rounded" src={userPicture} height={50} width={50} alt="pic-user-profile" />
                         <div className="d-flex flex-column ms-3 me-3">
                             <div className="fw-bold">{userName}</div>
-                            <div>{userEmail}</div>
+                            <div>{userPhone || userEmail}</div>
                         </div>
                         <div className="user-pointer mt-2" onClick={() => openModal()}><img src={require("../../../assets/img/icons/bell_homepage.png")} alt="icon-bell-homepage" /></div>
                     </div>

@@ -18,7 +18,7 @@ const UserContext = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <userContext.Provider value={{ userName: userDetailData.data?.username, userPicture: userDetailData.data?.picture, userEmail: userDetailData.data?.email}}>
+        <userContext.Provider value={{ userName: userDetailData.data?.username, userPicture: userDetailData.data?.picture, userEmail: userDetailData.data?.email, userPhone: userDetailData.data?.phone}}>
             {children}
         </userContext.Provider>
     )

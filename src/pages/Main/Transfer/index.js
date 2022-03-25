@@ -51,7 +51,7 @@ const Transfer = () => {
                                 <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt='' /></div>
                                 <div className="col lh-lg">
                                     <div className="fw-bold">{item.username}</div>
-                                    <div className="text-muted">{item.email}</div>
+                                    <div className="text-muted">{item.phone || item.email}</div>
                                 </div>
                             </div>
                         ))}
