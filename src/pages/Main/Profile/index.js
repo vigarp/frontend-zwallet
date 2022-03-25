@@ -2,6 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { decodeToken } from 'react-jwt';
 // import external modules
 import { GetUserDetail } from '../../../redux/actions/user';
 import { GetContacts } from '../../../redux/actions/contacts';
@@ -10,6 +11,8 @@ import './profile.css';
 
 const Profile = () => {
   localStorage.removeItem('tempTransfer');
+  const tokenUser = localStorage.getItem("token");
+  const userInfo = decodeToken(tokenUser);
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
@@ -31,6 +34,7 @@ const Profile = () => {
     localStorage.removeItem('token')
     window.location.reload('/auth/login')
   }
+  const contactsFiltered = contactsData.data.data?.filter(identity => identity.id !== userInfo.id)
   return (
     <Fragment>
       <main className="bg-white rounded g-0 p-4 d-flex flex-column align-items-center">
@@ -57,8 +61,8 @@ const Profile = () => {
               <div className="fw-bold flex-grow-1" onClick={() => navigate("/main/change-password")}>Change Password</div>
               <img src={require("../../../assets/img/icons/arrowright_profilepage.svg").default} alt="icon-arrowright-profilepage" />
             </div>
-            <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-pointer">
-              <div className="fw-bold flex-grow-1" onClick={() => navigate("/main/change-pin")}>Change PIN</div>
+            <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-disabled">
+              <div className="fw-bold flex-grow-1" /* onClick={() => navigate("/main/change-pin")} */ >Change PIN</div>
               <img src={require("../../../assets/img/icons/arrowright_profilepage.svg").default} alt="icon-arrowright-profilepage" />
             </div>
             <div className="bg-light px-5 py-3 my-3 w-75 rounded d-flex user-pointer">
@@ -76,12 +80,12 @@ const Profile = () => {
               <div className="text-decoration-none"><Link to={"/main/transfer"} style={{ textDecoration: 'none' }}>See All</Link></div>
             </div>
           </div>
-          {contactsData.data.data?.map((item, index) => (
+          {contactsFiltered?.map((item, index) => (
           <div className="row g-0 me-3 my-4 user-pointer" key={index} onClick={() => navigate(`/main/transfer/${item.id}`)}>
             <div className="col flex-grow-0 px-3"><img className="rounded" src={item.picture} width={60} height={60} alt="pic-detail-user" /></div>
             <div className="col lh-lg">
               <div className="fw-bold">{item.username}</div>
-              <div className="text-muted">{item.phone}</div>
+              <div className="text-muted">{item.phone || item.email}</div>
             </div>
           </div>
           ))}
