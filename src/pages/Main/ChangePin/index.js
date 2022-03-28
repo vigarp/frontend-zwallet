@@ -1,18 +1,12 @@
 // import internal modules
 import React, { Fragment, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 // import external modules
-import Input from '../../../components/base/Input';
 import Button from '../../../components/base/Button';
-import { editPassword } from '../../../redux/actions/editPassword';
 
 const ChangePin = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [pin, setPin] = useState(new Array(6).fill(""));
+  // eslint-disable-next-line no-unused-vars
   const [formPinError, setFormPinError] = useState(false);
   const resultPin = pin.join("");
 
@@ -35,6 +29,7 @@ const ChangePin = () => {
     return errors;
   }
 
+  // eslint-disable-next-line no-unused-vars
   const handleSubmit = (e) => {
     e.preventDefault();
     const resultValidate = validatePin(resultPin);
