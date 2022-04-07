@@ -14,13 +14,7 @@ in backend. Also using Socket.IO for notifications.
 </p>
 
 <p>
-
-<a href="https://github.com/rpetzandrian/justnews-frontend">
-
 <img src="https://img.shields.io/badge/-Open%20Source-blue" alt="Zwallet is released Open Source" />
-
-</a>
-
 </p>
 
 ![Zwallet](https://res.cloudinary.com/vigarp/image/upload/v1649293674/Screenshot_2022-04-07_at_08-06-53_Zwallet_E-Wallet_App_nckuhl.png)
