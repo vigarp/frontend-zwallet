@@ -8,7 +8,7 @@ in backend. Also using Socket.IO for notifications.
 
 </p>
 
-<p align="center">
+<p>
 
 <a href="https://github.com/rpetzandrian/justnews-frontend">
 
@@ -70,16 +70,16 @@ The features in this project include:
 
 **Login Page**
 
-![Login-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/41ec7830ceaea82096f62ea82bc662a7) 
+![Login-Zwallet](https://res.cloudinary.com/vigarp/image/upload/v1649294857/zwallet-assets/ss/41ec7830ceaea82096f62ea82bc662a7_l9bd7v.png)
 
 **Transfer Page**
 
-![TransferPage-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/7d1533bc1bcb0dad89e1cd27a1ff8689)
+![TransferPage-Zwallet](https://res.cloudinary.com/vigarp/image/upload/v1649294856/zwallet-assets/ss/7d1533bc1bcb0dad89e1cd27a1ff8689_k9zxyl.png)
 
 
 **Transfer Status**
 
-![TransferStatus-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/eb228bbe2f6922930f1f1a5a6fd0bd7d)
+![TransferStatus-Zwallet](https://res.cloudinary.com/vigarp/image/upload/v1649294856/zwallet-assets/ss/eb228bbe2f6922930f1f1a5a6fd0bd7d_jb4i8x.png)
 **Homepage**
 
-![TransferStatus-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/d822085da61632fdfc342f8c3cbf5018)
+![TransferStatus-Zwallet](https://res.cloudinary.com/vigarp/image/upload/v1649294856/zwallet-assets/ss/d822085da61632fdfc342f8c3cbf5018_wcdomk.png)
