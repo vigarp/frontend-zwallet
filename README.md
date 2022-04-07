@@ -1,72 +1,85 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/35a0063e-debd-4015-a7fa-a796b9970b0c/deploy-status)](https://app.netlify.com/sites/staging-zwallet-vigar/deploys)
 
-# Getting Started with Create React App
+<h1 align="center">Zwallet || E-Wallet App</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">Zwallet has several features including top-up and sending money to your friends with just a few
+clicks. This app was built by ReactJS and Redux in frontend, using ExpressJS and MySQL database
+in backend. Also using Socket.IO for notifications.
 
-## Available Scripts
+</p>
 
-In the project directory, you can run:
+<p align="center">
 
-### `npm start`
+<a href="https://github.com/rpetzandrian/justnews-frontend">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img src="https://img.shields.io/badge/-Open%20Source-blue" alt="Zwallet is released Open Source" />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</a>
 
-### `npm test`
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Zwallet](https://res.cloudinary.com/vigarp/image/upload/v1649293674/Screenshot_2022-04-07_at_08-06-53_Zwallet_E-Wallet_App_nckuhl.png)
 
-### `npm run build`
+##  Intermezzo
+Zwallet has several features including top-up and sending money to your friends with just a few clicks.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##  Getting started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To get the React app running locally:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Clone this repo with `git clone https://github.com/vigarp/zwallet-frontend.git project-name`
 
-### `npm run eject`
+* `cd project-name`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* `npm install` to install all required dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Create a `.env` file and add following:
+ ```sh
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ REACT_APP_URL_BACKEND = https://api-zwallet-vigar.herokuapp.com/v1
+REACT_APP_URL_WS = https://api-zwallet-vigar.herokuapp.com
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+* `npm start` to start the local development server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##  Architechture
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is using :
 
-### Code Splitting
+1. ReactJS ( Framework )
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Redux
 
-### Analyzing the Bundle Size
+3. Axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Bootstrap
 
-### Making a Progressive Web App
+##  Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The features in this project include:
 
-### Advanced Configuration
+- User can transfer their money to their friends
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- User can edit detail profile
 
-### Deployment
+- Created PIN for more authentication (on progress)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+##  Screenshoot
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Login Page**
+
+![Login-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/41ec7830ceaea82096f62ea82bc662a7) 
+
+**Transfer Page**
+
+![TransferPage-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/7d1533bc1bcb0dad89e1cd27a1ff8689)
+
+
+**Transfer Status**
+
+![TransferStatus-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/eb228bbe2f6922930f1f1a5a6fd0bd7d)
+**Homepage**
+
+![TransferStatus-Zwallet](https://arkademy-production.s3.ap-southeast-1.amazonaws.com/arkademy-showcase/71e832951aee48d98e3c0a52580d653a/d822085da61632fdfc342f8c3cbf5018)
