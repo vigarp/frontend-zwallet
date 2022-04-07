@@ -1,4 +1,9 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/35a0063e-debd-4015-a7fa-a796b9970b0c/deploy-status)](https://app.netlify.com/sites/staging-zwallet-vigar/deploys)
+###  Related Project
+
+* [`zwallet-frontend`](https://github.com/vigarp/zwallet-frontend)
+
+* [`zwallet-backend`](https://github.com/vigarp/zwallet-backend)
 
 <h1 align="center">Zwallet || E-Wallet App</h1>
 
