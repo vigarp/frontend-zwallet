@@ -10,3 +10,7 @@
 .dashboard-pointer {
     cursor: pointer;
 }
+
+.marker-icon {
+    margin-left: -20px;
+}
