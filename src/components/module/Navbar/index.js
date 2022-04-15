@@ -1,7 +1,7 @@
 // import internal modules
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { decodeToken } from 'react-jwt';
 
 // import external modules
@@ -25,6 +25,7 @@ const Navbar = () => {
     const [admInfo, setAdmInfo] = useState([]);
 
     const [showModal, setShowModal] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         socket.emit('user online', userInfo.id)
@@ -51,7 +52,7 @@ const Navbar = () => {
                 <div className="container d-flex justify-content-between p-3">
                     <div className="text-primary fw-bold fs-3"><Link to={"/main"} style={{ textDecoration: 'none' }}>Zwallet</Link></div>
                     <div className="d-flex">
-                        <img className="user-pointer rounded" src={userPicture} height={50} width={50} alt="pic-user-profile" />
+                        <img className="user-pointer rounded" src={userPicture} height={50} width={50} alt="pic-user-profile" onClick={()=> navigate("/main/profile")} />
                         <div className="d-flex flex-column ms-3 me-3">
                             <div className="fw-bold">{userName}</div>
                             <div>{userPhone || userEmail}</div>
